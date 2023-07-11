@@ -20,13 +20,24 @@ export default function Home(props: any) {
           />
         </Head>
         <div className={"flex flex-col items-center"}>
-          <div
-            className={"w-full mb-8 bg-center bg-cover duration-500"}
-          >
-            <Image 
-              src={slides[slideIndex].url}
-              alt={slides[slideIndex].alt}
+          <div className={"w-full h-full rounded-2xl bg-center bg-cover duration-500"}>
+            <Image
+              src={slides[slideIndex]?.url}
+              alt={slides[slideIndex]?.alt}
             />
+          </div>
+          <div className={"flex flex-row justify-center my-4"}>
+            {[...Array(slides.length)].map(
+              (value: undefined, index: number) => (
+                <button
+                  key={index}
+                  className={`w-20 h-3 mx-2 rounded-tl-3xl rounded-br-3xl ${
+                    slideIndex === index ? "bg-black" : "bg-gray-400"
+                  }`}
+                  onClick={() => setSlideIndex(index)}
+                />
+              )
+            )}
           </div>
           <div className={"flex flex-col px-8 py-2"}>
             <p className={"text-2xl"}>Check our products!</p>
