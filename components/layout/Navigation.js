@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useState } from "react";
+import DropDown from "../dropdown/Dropdown";
 
 export default function Navigation() {
   return (
@@ -12,27 +14,7 @@ export default function Navigation() {
           <p className={"text-xl m-5 text-white"}>AFK</p>
         </Link>
       </div>
-      <nav
-        className={
-          "flex flex-col md:flex-row items-center justify-center w-9/12" 
-        }
-      >
-        <ul
-          className={
-            "flex flex-col md:flex-row items-center justify-evenly w-11/12"
-          }
-        >
-          <Link href="/laptops" className={"flex flex-col"}>
-            <p className={"text-white"}>Laptops</p>
-          </Link>
-          <Link href="/PCs" className={"flex flex-col"}>
-            <p className={"text-white"}>PCs</p>
-          </Link>
-          <Link href="/Accessories" className={"flex flex-col"}>
-            <p className={"text-white"}>Accessories</p>
-          </Link>
-        </ul>
-      </nav>
+      <DropDown />
       <div className={"flex items-center justify-center w-2/12"}>
         <p className={"text-white"}>Cart</p>
       </div>
