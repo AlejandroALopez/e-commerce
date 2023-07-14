@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import { useDropdownContext } from "./Dropdown";
 import { Menu } from "@/types/menuTypes";
 import SubItem from "./SubItem";
 import RightArrow from "@/public/arrows/right1.svg";
@@ -10,15 +11,17 @@ interface MenuProps {
 
 export default function Item(props: MenuProps) {
   const { menu } = props;
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeType, setActiveType] = useState("");
+  const { openType, setOpenType } = useDropdownContext();
+  const [activeSubtype, setActiveSubtype] = useState("");
 
   return (
-    <div className={"flex flex-col"}>
-      <button onMouseEnter={() => setIsOpen(true)}>
+    <div
+      className={"flex flex-col"}
+    >
+      <button onMouseEnter={() => setOpenType(menu.title)}>
         <p
           className={`${
-            isOpen
+            openType === menu.title
               ? "text-[#AE0000] underline underline-offset-4"
               : "text-white"
           } text-xl`}
@@ -26,9 +29,9 @@ export default function Item(props: MenuProps) {
           {menu.title}
         </p>
       </button>
-      {isOpen && (
+      {openType === menu.title && (
         <div
-          onMouseLeave={() => setIsOpen(false)}
+          onMouseLeave={() => setOpenType("")}
           className={
             "bg-[#292929] absolute top-[4.2rem] flex flex-col items-start p-2 w-56"
           }
@@ -40,12 +43,12 @@ export default function Item(props: MenuProps) {
                   "flex flex-row items-center justify-between w-full hover:bg-[#AE0000] cursor-pointer p-2"
                 }
                 key={index}
-                onMouseEnter={() => setActiveType(item.title)}
+                onMouseEnter={() => setActiveSubtype(item.title)}
               >
                 <h3 className={"text-white text-lg"}>{item.title}</h3>
                 <Image src={RightArrow} alt="right arrow" />
               </div>
-              {item.submenu && activeType === item.title && (
+              {item.submenu && activeSubtype === item.title && (
                 <SubItem submenu={item.submenu} />
               )}
             </div>
