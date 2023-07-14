@@ -19,7 +19,7 @@ export default function Filters() {
       <div className={"flex flex-row justify-between items-center"}>
         <div className={"flex flex-row"}>
           <p className={"text-2xl mr-2"}>{results.length} Results</p>
-          {activeFilters.map((filter, index) => (
+          {/* {activeFilters.map((filter, index) => (
             <div
               key={index}
               className={
@@ -33,7 +33,7 @@ export default function Filters() {
             <button className={"ml-2"} onClick={() => setActiveFilters([])}>
               <p className={"text-md text-red-500"}>Clear all</p>
             </button>
-          )}
+          )} */}
         </div>
         <div className={"flex flex-row items-center"}>
           <p>Sort by</p>

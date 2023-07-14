@@ -2,19 +2,29 @@ import Head from "next/head";
 import { Dispatch, SetStateAction, useState, createContext, Fragment, useContext } from "react";
 import Filters from "@/components/filters/Filters";
 import FilterResults from "@/components/filters/FilterResults";
+import { laptopActiveFilters } from "@/types/filterTypes";
 
 interface ContextProps {
-    activeFilters: string[],
-    setActiveFilters: Dispatch<SetStateAction<string[]>>,
+    activeFilters: laptopActiveFilters,
+    setActiveFilters: Dispatch<SetStateAction<laptopActiveFilters>>,
 }
 
 export const FiltersContext = createContext<ContextProps>({
-    activeFilters: [],
-    setActiveFilters: (): string[] => []
+    activeFilters: {
+      price: { min: 0, max: 100000 },
+      components: {}
+    },
+    setActiveFilters: (): laptopActiveFilters => Object({
+      price: { min: 0, max: 100000 },
+      components: {}
+    },)
 });
 
 export default function Catalogue() {
-  const [activeFilters, setActiveFilters] = useState<[] | string[]>([]);
+  const [activeFilters, setActiveFilters] = useState<laptopActiveFilters>({
+    price: { min: 0, max: 100000 },
+    components: {}
+  },);
 
   return (
     <Fragment>
