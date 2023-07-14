@@ -4,7 +4,7 @@ import Item from './Item';
 export default function DropDown() {
   return (
     <nav
-      className={"flex flex-col md:flex-row items-center justify-center w-9/12"}
+      className={"flex flex-col md:flex-row items-center justify-center w-9/12 z-10"}
     >
       <ul
         className={
