@@ -7,3 +7,9 @@ export interface laptopActiveFilters {
     [key: string]: string[]; // e.g. memory: ["8GB", "16GB", "32GB"]
   }
 }
+
+export interface PriceFilters {
+  name: string,
+  min: number,
+  max: number,
+}

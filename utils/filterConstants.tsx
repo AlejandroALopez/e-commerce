@@ -1,3 +1,23 @@
+import { PriceFilters } from "@/types/filterTypes";
+
+export const priceFilters: PriceFilters[] = [
+  {
+    name: "$1000 or less",
+    min: 0,
+    max: 1000,
+  },
+  {
+    name: "$1001 - $2000",
+    min: 1001,
+    max: 2000,
+  },
+  {
+    name: "$2001 - $3000",
+    min: 2001,
+    max: 3000,
+  },
+]
+
 export const laptopFilters = [
   {
     title: "Brand",

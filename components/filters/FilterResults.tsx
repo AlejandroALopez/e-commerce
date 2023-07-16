@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFiltersContext } from "@/pages/catalogue";
 import FilterProduct from "./FilterProduct";
 import { Laptop } from "@/types/productTypes";
@@ -10,6 +10,37 @@ export default function Filters() {
   const { activeFilters, setActiveFilters } = useFiltersContext();
   const [results, setResults] = useState<Laptop[]>(TEST_LAPTOPS);
 
+  function filterHelper(element: Laptop) {
+    let filtered: boolean = true;
+
+    if (
+      element.basePrice < activeFilters.price.min ||
+      element.basePrice > activeFilters.price.max
+    ) {
+      filtered = false; // price range not met
+      return filtered;
+    }
+
+    for (const [key, value] of Object.entries(activeFilters.components)) {
+      // for every filter
+      if (
+        activeFilters.components[key].indexOf(
+          element.baseComponents[key].name
+        ) === -1
+      ) {
+        // check if product is in filter's array
+        filtered = false; // filter not satisfied, dont include item
+        break;
+      }
+    }
+    return filtered; // if all filters passed, include
+  }
+
+  useEffect(() => {
+    // when filters change, filter laptops array
+    setResults(TEST_LAPTOPS.filter((laptop: Laptop) => filterHelper(laptop)));
+  }, [activeFilters]);
+
   function handleSort() {
     console.log("TODO: Sort by options");
   }
@@ -18,22 +49,7 @@ export default function Filters() {
     <div className={"flex flex-col w-8/12 h-full my-4 p-4"}>
       <div className={"flex flex-row justify-between items-center"}>
         <div className={"flex flex-row"}>
-          <p className={"text-2xl mr-2"}>{results.length} Results</p>
-          {/* {activeFilters.map((filter, index) => (
-            <div
-              key={index}
-              className={
-                "flex flex-row justify-between items-center bg-[#535353] px-2 mx-1 rounded-sm"
-              }
-            >
-              <p className={"text-[#C7C0C0]"}>{filter}</p>
-            </div>
-          ))}
-          {activeFilters.length > 0 && (
-            <button className={"ml-2"} onClick={() => setActiveFilters([])}>
-              <p className={"text-md text-red-500"}>Clear all</p>
-            </button>
-          )} */}
+          <p className={"text-2xl mr-2"}>{results.length} Result(s)</p>
         </div>
         <div className={"flex flex-row items-center"}>
           <p>Sort by</p>

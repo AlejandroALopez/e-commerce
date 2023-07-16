@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { laptopFilters } from "@/utils/filterConstants";
+import { laptopFilters, priceFilters } from "@/utils/filterConstants";
 import { useFiltersContext } from "@/pages/catalogue";
 import CheckIcon from "@/public/buttons/check.svg";
+import { useState } from "react";
 
 export default function Filters() {
   const { activeFilters, setActiveFilters } = useFiltersContext();
+  const [activePriceFilter, setActivePriceFilter] = useState("");
 
   function isComponentInFilters(alias: string, option: string): boolean {
     return (
@@ -23,7 +25,10 @@ export default function Filters() {
       // new filter, add first option
       updatedValue = { [alias]: [option] };
     }
-    setActiveFilters((prevFilters) => ({ ...prevFilters, components: {...prevFilters.components, ...updatedValue } }));
+    setActiveFilters((prevFilters) => ({
+      ...prevFilters,
+      components: { ...prevFilters.components, ...updatedValue },
+    }));
   }
 
   // handler for removing an option to the filter, adding a key if needed
@@ -42,7 +47,7 @@ export default function Filters() {
         components: {
           ...activeFilters.components,
           [alias]: copyArray,
-        }
+        },
       }));
     }
   }
@@ -51,6 +56,72 @@ export default function Filters() {
     <div
       className={"flex flex-col w-3/12 h-full my-4 p-4 bg-white drop-shadow-lg"}
     >
+      <p className={"text-2xl mb-2"}>Filters: </p>
+      <div className={"flex flex-row flex-wrap"}>
+        {Object.keys(activeFilters.components).map((filter) =>
+          activeFilters.components[filter].map((f, index) => (
+            <div
+              key={index}
+              className={
+                "flex flex-row w-fit items-center bg-[#535353] py-1 px-4 m-1 rounded-sm"
+              }
+            >
+              <p className={"text-[#C7C0C0]"}>{f}</p>
+            </div>
+          ))
+        )}
+        {Object.keys(activeFilters.components).length > 0 && (
+          <button
+            className={"ml-2"}
+            onClick={() =>
+              setActiveFilters({
+                price: { min: 0, max: 100000 },
+                components: {},
+              })
+            }
+          >
+            <p className={"text-md text-red-500"}>Clear all</p>
+          </button>
+        )}
+      </div>
+      {/* price filters */}
+      <div>
+        <p className={"text-xl"}>By Price</p>
+        {priceFilters.map((filter, index) => (
+          <div key={index} className={"flex flex-row items-center my-2"}>
+            <button
+              onClick={() => {
+                if (filter.name === activePriceFilter) {
+                  setActivePriceFilter("");
+                  setActiveFilters((prevFilters) => ({
+                    ...prevFilters,
+                    price: { min: 0, max: 100000 },
+                  }));
+                } else {
+                  setActivePriceFilter(filter.name);
+                  setActiveFilters((prevFilters) => ({
+                    ...prevFilters,
+                    price: { min: filter.min, max: filter.max },
+                  }));
+                }
+              }}
+              className={`rounded-md border-black border-[1.5px] mr-2 ${
+                filter.name === activePriceFilter
+                  ? "bg-black p-1"
+                  : "bg-white p-3"
+              }`}
+            >
+              {filter.name === activePriceFilter && (
+                <div className={"relative w-[16px] h-[16px]"}>
+                  <Image src={CheckIcon} alt="check" />
+                </div>
+              )}
+            </button>
+            <p>{filter.name}</p>
+          </div>
+        ))}
+      </div>
+      {/* other filters */}
       {laptopFilters.map((filter, index) => (
         <div key={index}>
           <p className={"text-xl"}>By {filter.title}</p>

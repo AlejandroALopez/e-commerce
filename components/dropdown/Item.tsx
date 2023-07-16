@@ -37,7 +37,7 @@ export default function Item(props: MenuProps) {
           }
         >
           {menu.items.map((item, index) => (
-            <div>
+            <div key={index}>
               <div
                 className={
                   "flex flex-row items-center justify-between w-full hover:bg-[#AE0000] cursor-pointer p-2"
