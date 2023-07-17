@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Laptop } from "@/types/productTypes";
 import { moneyFormatter } from "@/utils/productConstants";
 import LaptopImg from "@/public/products/product1.png";
@@ -8,10 +9,10 @@ interface FilterProductProps {
 }
 
 export default function FilterProduct(props: FilterProductProps) {
-  const results = 136;
+  const router = useRouter();
 
   function seeProductHandler() {
-    console.log("see product");
+    router.push("/product/" + props.product.id);
   }
 
   return (

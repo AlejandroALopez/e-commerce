@@ -48,7 +48,36 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 400,
       },
     },
-    availableComponents: {},
+    availableComponents: {
+      memory: [
+        {
+          name: "16GB",
+          price: 200,
+        },
+        {
+          name: "32GB",
+          price: 400,
+        },
+      ],
+      storage: [
+        {
+          name: "512 GB",
+          price: 200,
+        },
+        {
+          name: "1TB",
+          price: 400,
+        },
+        {
+          name: "2TB",
+          price: 600,
+        },
+        {
+          name: "4TB",
+          price: 800,
+        },
+      ],
+    },
   },
   {
     id: "j29jd892732d121d",
