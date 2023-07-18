@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { Fragment, useState } from "react";
 import { TEST_LAPTOPS } from "@/testData/laptops";
 import { Laptop, Component } from "@/types/productTypes";
-import { moneyFormatter, firstLetterUpercase } from "@/utils/productConstants";
+import { moneyFormatter, firstLetterUpercase, costDifferenceFormatter } from "@/utils/productConstants";
 
 interface ProductProps {
   productData: Laptop;
@@ -32,10 +32,16 @@ function ProductPage(props: ProductProps) {
     const currCompPrice = customProduct.baseComponents[componentType].price;
     const newCompPrice = component.price;
 
-    if (currCompPrice >= newCompPrice) { // decrease price
-      setCurrentPrice((prevPrice) => prevPrice - (currCompPrice - newCompPrice))
-    } else { // increase price
-      setCurrentPrice((prevPrice) => prevPrice + (newCompPrice - currCompPrice))
+    if (currCompPrice >= newCompPrice) {
+      // decrease price
+      setCurrentPrice(
+        (prevPrice) => prevPrice - (currCompPrice - newCompPrice)
+      );
+    } else {
+      // increase price
+      setCurrentPrice(
+        (prevPrice) => prevPrice + (newCompPrice - currCompPrice)
+      );
     }
 
     setCustomProduct((prevProduct) => ({
@@ -116,6 +122,14 @@ function ProductPage(props: ProductProps) {
                           >
                             {comp.name}
                           </p>
+                           {/* Text with price difference */}
+                          {!isComponentActive(customProduct, compType, comp) &&
+                          <p
+                            className={`text-md text-gray-400`}
+                          >
+                            {costDifferenceFormatter(customProduct.baseComponents[compType].price, comp.price)}
+                          </p>
+                        }
                         </button>
                       ))}
                     </div>

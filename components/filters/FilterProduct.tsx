@@ -12,7 +12,7 @@ export default function FilterProduct(props: FilterProductProps) {
   const router = useRouter();
 
   function seeProductHandler() {
-    router.push("/product/" + props.product.id);
+    router.push("/catalogue/" + props.product.id);
   }
 
   return (
