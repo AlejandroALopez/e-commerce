@@ -6,6 +6,7 @@ export const TEST_LAPTOPS: Laptop[] = [
     title: "Alienware m7",
     type: "Laptop",
     basePrice: 1599.99,
+    images: ["image1.png", "image2.png","image3.png", "image4.png", "image5.png", "image6.png", "image7.png", "image8.png"],
     baseComponents: {
       brand: {
         name: "Dell",
@@ -81,16 +82,17 @@ export const TEST_LAPTOPS: Laptop[] = [
   },
   {
     id: "j29jd892732d121d",
-    title: "TUF L7",
+    title: "ROG Strix G16",
     type: "Laptop",
     basePrice: 2599.99,
+    images: ["image1.webp", "image2.webp","image3.webp", "image4.webp"],
     baseComponents: {
       brand: {
-        name: "Dell",
+        name: "ASUS",
         price: 0,
       },
       productLine: {
-        name: "TUF",
+        name: "ROG Strix",
         price: 0,
       },
       category: {

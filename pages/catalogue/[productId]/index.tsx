@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import { GetServerSidePropsContext } from "next";
 import { Fragment, useState } from "react";
+import ImageSelector from "@/components/product/ImageSelector";
 import { TEST_LAPTOPS } from "@/testData/laptops";
 import { Laptop, Component } from "@/types/productTypes";
 import {
@@ -9,7 +9,6 @@ import {
   firstLetterUpercase,
   costDifferenceFormatter,
 } from "@/utils/productConstants";
-import { bucket, getFolderName } from "@/utils/awsConstants";
 
 interface ProductProps {
   productData: Laptop;
@@ -20,7 +19,6 @@ function ProductPage(props: ProductProps) {
     props.productData.basePrice
   );
   const [customProduct, setCustomProduct] = useState<Laptop>(props.productData);
-  const [imageURLs, setImagesURLs] = useState<string[]>([]); // add just the image file name
 
   // Check if the component is contained in the product's current components
   function isComponentActive(
@@ -74,16 +72,7 @@ function ProductPage(props: ProductProps) {
           <div className={"w-full my-6 p-5 bg-white drop-shadow-lg"}>
             <p className={"text-3xl"}>{props.productData.title}</p>
           </div>
-          <div className={"w-full p-5 h-96 bg-white drop-shadow-lg"}>
-            <div className={"relative w-[350px] h-[350px]"}>
-              <Image
-                src={`${bucket}/${getFolderName(props.productData.type)}/${props.productData.id}/image1.png`}
-                width={350}
-                height={350}
-                alt="prod"
-              />
-            </div>
-          </div>
+          <ImageSelector id={props.productData.id} type={props.productData.type} images={props.productData.images}/>
         </div>
         <div className={"w-1/2"}>
           <div
@@ -184,6 +173,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         title: selectedProduct?.title,
         type: selectedProduct?.type,
         basePrice: selectedProduct?.basePrice,
+        images: selectedProduct?.images,
         baseComponents: selectedProduct?.baseComponents,
         availableComponents: selectedProduct?.availableComponents,
       },
