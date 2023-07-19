@@ -1,9 +1,15 @@
 import Head from "next/head";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import Image from "next/image";
+import { GetServerSidePropsContext } from "next";
 import { Fragment, useState } from "react";
 import { TEST_LAPTOPS } from "@/testData/laptops";
 import { Laptop, Component } from "@/types/productTypes";
-import { moneyFormatter, firstLetterUpercase, costDifferenceFormatter } from "@/utils/productConstants";
+import {
+  moneyFormatter,
+  firstLetterUpercase,
+  costDifferenceFormatter,
+} from "@/utils/productConstants";
+import { bucket, getFolderName } from "@/utils/awsConstants";
 
 interface ProductProps {
   productData: Laptop;
@@ -14,6 +20,7 @@ function ProductPage(props: ProductProps) {
     props.productData.basePrice
   );
   const [customProduct, setCustomProduct] = useState<Laptop>(props.productData);
+  const [imageURLs, setImagesURLs] = useState<string[]>([]); // add just the image file name
 
   // Check if the component is contained in the product's current components
   function isComponentActive(
@@ -67,7 +74,16 @@ function ProductPage(props: ProductProps) {
           <div className={"w-full my-6 p-5 bg-white drop-shadow-lg"}>
             <p className={"text-3xl"}>{props.productData.title}</p>
           </div>
-          <div className={"w-full p-5 h-96 bg-white drop-shadow-lg"}></div>
+          <div className={"w-full p-5 h-96 bg-white drop-shadow-lg"}>
+            <div className={"relative w-[350px] h-[350px]"}>
+              <Image
+                src={`${bucket}/${getFolderName(props.productData.type)}/${props.productData.id}/image1.png`}
+                width={350}
+                height={350}
+                alt="prod"
+              />
+            </div>
+          </div>
         </div>
         <div className={"w-1/2"}>
           <div
@@ -122,14 +138,19 @@ function ProductPage(props: ProductProps) {
                           >
                             {comp.name}
                           </p>
-                           {/* Text with price difference */}
-                          {!isComponentActive(customProduct, compType, comp) &&
-                          <p
-                            className={`text-md text-gray-400`}
-                          >
-                            {costDifferenceFormatter(customProduct.baseComponents[compType].price, comp.price)}
-                          </p>
-                        }
+                          {/* Text with price difference */}
+                          {!isComponentActive(
+                            customProduct,
+                            compType,
+                            comp
+                          ) && (
+                            <p className={`text-md text-gray-400`}>
+                              {costDifferenceFormatter(
+                                customProduct.baseComponents[compType].price,
+                                comp.price
+                              )}
+                            </p>
+                          )}
                         </button>
                       ))}
                     </div>
