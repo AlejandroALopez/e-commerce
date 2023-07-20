@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import DropDown from "../dropdown/Dropdown";
 
 export default function Navigation() {
