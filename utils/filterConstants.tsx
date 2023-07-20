@@ -16,6 +16,11 @@ export const priceFilters: PriceFilters[] = [
     min: 2001,
     max: 3000,
   },
+  {
+    name: "$3001 - $4000",
+    min: 3001,
+    max: 4000,
+  },
 ];
 
 export const laptopFilters = [
@@ -27,7 +32,7 @@ export const laptopFilters = [
   {
     title: "Product Line",
     alias: "productLine",
-    options: ["ASUS ROG", "Alienware", "TUF", "G Series"],
+    options: ["ASUS ROG", "Alienware", "OMEN", "Victus"],
   },
   {
     title: "Memory (RAM)",
@@ -43,9 +48,10 @@ export const laptopFilters = [
     title: "Processor",
     alias: "processor",
     options: [
-      "Intel core i7 10th Gen",
+      "Intel core i5 13th Gen",
       "Intel core i7 13th Gen",
       "Intel core i9 13th Gen",
+      "AMD Ryzen 9",
     ],
   },
   {
@@ -57,6 +63,7 @@ export const laptopFilters = [
     title: "Graphics",
     alias: "graphics",
     options: [
+      "NVIDIA GeForce RTX 3050, 6GB",
       "NVIDIA GeForce RTX 4060, 8GB",
       "NVIDIA GeForce RTX 4070, 8GB",
       "NVIDIA GeForce RTX 4080, 12GB",
