@@ -16,7 +16,7 @@ export const priceFilters: PriceFilters[] = [
     min: 2001,
     max: 3000,
   },
-]
+];
 
 export const laptopFilters = [
   {
@@ -30,19 +30,14 @@ export const laptopFilters = [
     options: ["ASUS ROG", "Alienware", "TUF", "G Series"],
   },
   {
-    title: "Category",
-    alias: "category",
-    options: ["Work", "Design", "Gaming"],
-  },
-  {
     title: "Memory (RAM)",
     alias: "memory",
-    options: ["8GB", "16GB", "32GB"],
+    options: ["8GB", "16GB", "32GB", "64GB"],
   },
   {
     title: "Storage Space",
     alias: "storage",
-    options: ["512GB", "1TB", "2TB"],
+    options: ["512GB", "1TB", "2TB", "4TB", "8TB"],
   },
   {
     title: "Processor",
@@ -50,31 +45,22 @@ export const laptopFilters = [
     options: [
       "Intel core i7 10th Gen",
       "Intel core i7 13th Gen",
-      "Intel core i9 10th Gen",
+      "Intel core i9 13th Gen",
     ],
   },
   {
     title: "OS",
     alias: "os",
-    options: ["Windows 10", "Windows 11", "Linux"],
-  },
-  {
-    title: "Display",
-    alias: "display",
-    options: ["30 Hz", "60 Hz", "120 Hz", "300 Hz"],
-  },
-  {
-    title: "Screen Size",
-    alias: "screenSize",
-    options: ["13 inch", "15 inch", "17 inch"],
+    options: ["Windows 11", "Windows 11 Pro"],
   },
   {
     title: "Graphics",
     alias: "graphics",
     options: [
-      "NVIDIA RTX 3060 6GB",
-      "NVIDIA RTX 3070 8GB",
-      "NVIDIA RTX 3080 8GB",
+      "NVIDIA GeForce RTX 4060, 8GB",
+      "NVIDIA GeForce RTX 4070, 8GB",
+      "NVIDIA GeForce RTX 4080, 12GB",
+      "NVIDIA GeForce RTX 4090, 16GB",
     ],
   },
 ];

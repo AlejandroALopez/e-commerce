@@ -17,6 +17,7 @@ export default function ImageSelector(props: ImageSelectorProps) {
       <div className={"flex flex-col p-2 max-h-96 overflow-scroll"}>
         {props.images.map((fileName, index) => (
           <button
+            key={index}
             onClick={() => setCurrentImageIndex(index)}
             className={`mb-4 w-[100px] h-[100px] rounded-md border-4 p-1 ${currentImageIndex === index ? "border-[#D40E0E]": "border-gray-300"}`}
           >
