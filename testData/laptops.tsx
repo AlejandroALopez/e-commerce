@@ -99,7 +99,7 @@ export const TEST_LAPTOPS: Laptop[] = [
       ],
       storage: [
         {
-          name: "512 GB",
+          name: "512GB",
           price: 0,
         },
         {
@@ -272,7 +272,7 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 0,
       },
       processor: {
-        name: "AMD Ryzen 9",
+        name: "Intel core i9 13th Gen",
         price: 0,
       },
       os: {
@@ -284,7 +284,7 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 0,
       },
       graphics: {
-        name: "NVIDIA GeForce RTX 4060, 8GB",
+        name: "NVIDIA GeForce RTX 4080, 12GB",
         price: 0,
       },
     },
@@ -378,7 +378,7 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 0,
       },
       processor: {
-        name: "Intel core i7 13th Gen",
+        name: "AMD Ryzen 9",
         price: 0,
       },
       os: {
@@ -390,19 +390,19 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 0,
       },
       graphics: {
-        name: "NVIDIA GeForce RTX 4070, 8GB",
+        name: "NVIDIA GeForce RTX 4080, 12GB",
         price: 0,
       },
     },
     availableComponents: {
       processor: [
         {
-          name: "Intel core i7 13th Gen",
+          name: "AMD Ryzen 9",
           price: 0,
         },
         {
           name: "Intel core i9 13th Gen",
-          price: 800,
+          price: 300,
         },
       ],
       graphics: [
@@ -492,7 +492,7 @@ export const TEST_LAPTOPS: Laptop[] = [
         price: 0,
       },
       storage: {
-        name: "512 GB",
+        name: "512GB",
         price: 0,
       },
       processor: {
@@ -557,7 +557,7 @@ export const TEST_LAPTOPS: Laptop[] = [
       ],
       storage: [
         {
-          name: "512 GB",
+          name: "512GB",
           price: 0,
         },
         {
