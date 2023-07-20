@@ -16,7 +16,9 @@ export default function Navigation() {
       </div>
       <DropDown />
       <div className={"flex items-center justify-center w-2/12"}>
+      <Link href="/checkout/cart">
         <p className={"text-white"}>Cart</p>
+      </Link>
       </div>
     </div>
   );

@@ -131,7 +131,3 @@ export const TEST_LAPTOPS: Laptop[] = [
     availableComponents: {},
   },
 ];
-
-// categories: ["Gaming", "Work"],
-// colors: ["gray", "white", "black"],
-// sizes: ["13 inches", "15 inches", "17 inches"],
