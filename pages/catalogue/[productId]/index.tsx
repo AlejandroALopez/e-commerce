@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
+import { useCartContext } from "@/pages/_app";
 import ImageSelector from "@/components/product/ImageSelector";
 import { TEST_LAPTOPS } from "@/testData/laptops";
 import { Laptop, Component } from "@/types/productTypes";
@@ -15,6 +17,8 @@ interface ProductProps {
 }
 
 function ProductPage(props: ProductProps) {
+  const router = useRouter();
+  const { cart, setCart } = useCartContext();
   const [currentPrice, setCurrentPrice] = useState<number>(
     props.productData.basePrice
   );
@@ -58,6 +62,16 @@ function ProductPage(props: ProductProps) {
     }));
   }
 
+  function addProductToCart() {
+    const prod = {
+      number: 1,
+      price: currentPrice,
+      product: customProduct
+    };
+    setCart((prevCart) => [...prevCart, prod]);
+    router.back();
+  };
+
   return (
     <Fragment>
       <Head>
@@ -88,6 +102,7 @@ function ProductPage(props: ProductProps) {
             </p>
             <button
               className={"bg-[#D40E0E] rounded-sm py-2 px-6 drop-shadow-lg"}
+              onClick={addProductToCart}
             >
               <p className={"text-white"}>Add to cart</p>
             </button>

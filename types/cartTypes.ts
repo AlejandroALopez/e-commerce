@@ -1,5 +1,7 @@
 import { Laptop } from "./productTypes";
 
-export interface Cart {
-  products: Laptop[]; // later make this <Desktop | Laptop | Accessory>[]
+export interface CartElement {
+  number: number,
+  price: number,
+  product: Laptop, // later make this <Laptop | Accessory>[]
 }

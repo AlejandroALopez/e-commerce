@@ -1,62 +1,46 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useCartContext } from "@/pages/_app";
 import { Fragment, useState } from "react";
 import { moneyFormatter } from "@/utils/productConstants";
 
 export function Cart() {
-  const [products, setProducts] = useState([
-    {
-      number: 1,
-      product: {
-        id: "2om2ni2f2",
-        name: "ROG Zephyrus G14",
-        basePrice: 3299.99,
-      },
-    },
-    {
-      number: 1,
-      product: {
-        id: "2d923d92nc",
-        name: "HP Victus Laptop 2023",
-        basePrice: 2499.99,
-      },
-    },
-  ]); // TODO: Use real products instead
+  const { cart, setCart } = useCartContext();
 
   // Increase number of orders of a product in cart by one
   function increaseProductCount(id: string) {
-    const updatedProducts = products.map((p) => {
+    const updatedProducts = cart.map((p) => {
       if (p.product.id === id) {
         return { ...p, number: p.number + 1 };
       }
 
       return p;
     });
-    setProducts(updatedProducts);
+    setCart(updatedProducts);
   }
 
   // Decrease number of orders of a product in cart by one
   function decreaseProductCount(id: string) {
-    const updatedProducts = products.map((p) => {
+    const updatedProducts = cart.map((p) => {
       if (p.product.id === id) {
         return { ...p, number: p.number - 1 };
       }
 
       return p;
     });
-    setProducts(updatedProducts);
+    setCart(updatedProducts);
   }
 
   function removeProduct(id: string) {
-    const updatedProducts = products.filter((p) => {
-      return p.product.id !== id;
+    const updatedProducts = cart.filter((p) => {
+      return (p.product.id !== id);
     });
-    setProducts(updatedProducts);
+    setCart(updatedProducts);
   }
 
   function getTotalPrice() {
-    return products.reduce(
-      (total, p) => (total = total + p.product.basePrice * p.number),
+    return cart.reduce(
+      (total, p) => (total = total + p.price * p.number),
       0
     );
   }
@@ -76,14 +60,14 @@ export function Cart() {
         <div className={"mt-4"}>
           <p className={"text-3xl font-semibold"}>Your Cart</p>
         </div>
-        {products.map((p) => (
+        {cart.map((p) => (
           <div
             key={p.product.id}
             className={"flex flex-row h-60 border-2 border-gray-400"}
           >
             <div className={"bg-gray-300 w-3/12 h-full p-4"} />
             <div className={" w-6/12 h-full p-4"}>
-              <p className={"text-xl font-semibold"}>{p.product.name}</p>
+              <p className={"text-xl font-semibold"}>{p.product.title}</p>
             </div>
             <div
               className={
@@ -92,7 +76,7 @@ export function Cart() {
             >
               <div className={"flex flex-col items-end"}>
                 <p className={"text-xl font-semibold"}>
-                  {moneyFormatter.format(p.product.basePrice)}
+                  {moneyFormatter.format(p.price)}
                 </p>
                 <button onClick={() => removeProduct(p.product.id)}>
                   <p className={"text-blue-400"}>Remove</p>
