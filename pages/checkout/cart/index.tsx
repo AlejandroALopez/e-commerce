@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { useCartContext } from "@/pages/_app";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { moneyFormatter } from "@/utils/productConstants";
+import { bucket, getFolderName } from "@/utils/awsConstants";
 
 export function Cart() {
   const { cart, setCart } = useCartContext();
@@ -33,16 +35,13 @@ export function Cart() {
 
   function removeProduct(id: string) {
     const updatedProducts = cart.filter((p) => {
-      return (p.product.id !== id);
+      return p.product.id !== id;
     });
     setCart(updatedProducts);
   }
 
   function getTotalPrice() {
-    return cart.reduce(
-      (total, p) => (total = total + p.price * p.number),
-      0
-    );
+    return cart.reduce((total, p) => (total = total + p.price * p.number), 0);
   }
 
   return (
@@ -63,9 +62,19 @@ export function Cart() {
         {cart.map((p) => (
           <div
             key={p.product.id}
-            className={"flex flex-row h-60 border-2 border-gray-400"}
+            className={"flex flex-row h-60 rounded-md bg-white drop-shadow-md"}
           >
-            <div className={"bg-gray-300 w-3/12 h-full p-4"} />
+            {/* <div className={"bg-gray-300 w-3/12 h-full p-4"} /> */}
+            <div className={"flex justify-center items-center w-3/12 h-full"}>
+              <Image
+                src={`${bucket}/${getFolderName(p.product.type)}/${
+                  p.product.id
+                }/${p.product.images[0]}`}
+                height={200}
+                width={200}
+                alt="product image"
+              />
+            </div>
             <div className={" w-6/12 h-full p-4"}>
               <p className={"text-xl font-semibold"}>{p.product.title}</p>
             </div>
@@ -113,7 +122,10 @@ export function Cart() {
           </div>
         </div>
         <div className={"flex flex-row-reverse mb-12"}>
-          <Link href="/checkout/payment" className={"bg-[#D40E0E] py-4 px-12 rounded-lg"}>
+          <Link
+            href="/checkout/payment"
+            className={"bg-[#D40E0E] py-4 px-12 rounded-lg"}
+          >
             <p className={"text-white text-xl"}>Checkout</p>
           </Link>
         </div>
