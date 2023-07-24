@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useCartContext } from "@/pages/_app";
 import ImageSelector from "@/components/product/ImageSelector";
-import { TEST_LAPTOPS } from "@/testData/laptops";
 import { Laptop, Component } from "@/types/productTypes";
 import {
   moneyFormatter,
   firstLetterUpercase,
   costDifferenceFormatter,
 } from "@/utils/productConstants";
+import { getOneProductHandler } from "@/actions/productActions";
 
 interface ProductProps {
   productData: Laptop;
@@ -174,17 +174,14 @@ export default ProductPage;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { productId } = context.query;
 
-  // const selectedProduct = await getOneProductHandler(
-  //   productId as string,
-  // );
-
-  const selectedProduct = TEST_LAPTOPS.find((item) => item.id === productId);
+  const selectedProduct = await getOneProductHandler(
+    productId as string,
+  );
 
   return {
     props: {
       productData: {
-        // id: selectedProduct?._id.toString(),
-        id: selectedProduct?.id,
+        id: selectedProduct?._id.toString(),
         title: selectedProduct?.title,
         type: selectedProduct?.type,
         basePrice: selectedProduct?.basePrice,

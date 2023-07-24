@@ -6,9 +6,13 @@ import { Laptop } from "@/types/productTypes";
 import { TEST_LAPTOPS } from "@/testData/laptops";
 import DownArrow from "@/public/arrows/down1.svg";
 
-export default function Filters() {
+interface FiltersProps {
+  products: Laptop[] | any[],
+}
+
+export default function Filters(props: FiltersProps) {
   const { activeFilters, setActiveFilters } = useFiltersContext();
-  const [results, setResults] = useState<Laptop[]>(TEST_LAPTOPS);
+  const [results, setResults] = useState<Laptop[]>(props.products);
 
   function filterHelper(element: Laptop) {
     let filtered: boolean = true;
@@ -38,7 +42,7 @@ export default function Filters() {
 
   useEffect(() => {
     // when filters change, filter laptops array
-    setResults(TEST_LAPTOPS.filter((laptop: Laptop) => filterHelper(laptop)));
+    setResults(props.products.filter((laptop: Laptop) => filterHelper(laptop)));
   }, [activeFilters]);
 
   function handleSort() {
