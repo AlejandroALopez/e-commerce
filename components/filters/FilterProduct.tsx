@@ -23,15 +23,15 @@ export default function FilterProduct(props: FilterProductProps) {
     >
       <div className={"flex items-center w-[160px] h-[160px]"}>
         <Image
-          src={`${bucket}/${getFolderName(props.product.type)}/${props.product.id}/${
-            props.product.images[0]
-          }`}
+          src={`${bucket}/${getFolderName(props.product.type)}/${
+            props.product.id
+          }/${props.product.images[0]}`}
           height={160}
           width={160}
           alt="laptop"
         />
       </div>
-      <p className={"text-2xl"}>{props.product.title}</p>
+      <p className={"text-2xl h-20 text-center"}>{props.product.title}</p>
       <div className={"flex flex-col items-start w-3/4 my-6"}>
         <p>- Detail A</p>
         <p>- Detail B</p>
@@ -42,7 +42,9 @@ export default function FilterProduct(props: FilterProductProps) {
         {moneyFormatter.format(props.product.basePrice)}
       </p>
       <button
-        className={"bg-[#D40E0E] rounded-bl-full my-4 py-2 px-10"}
+        className={
+          "bg-[#D40E0E] rounded-bl-full my-4 py-2 px-10 transition hover:scale-110 duration-300"
+        }
         onClick={seeProductHandler}
       >
         <p className={"text-white"}>BUY NOW</p>

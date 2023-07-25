@@ -16,3 +16,26 @@ export const slides = [
     url: Image3
   },
 ];
+
+export const typeImages = [
+  {
+    type: "Headset",
+    title: "Headsets",
+    fileName: "sampleHeadset.png",
+  },
+  {
+    type: "Laptop",
+    title: "Laptops",
+    fileName: "sampleLaptop.png",
+  },
+  {
+    type: "Monitor",
+    title: "Monitors",
+    fileName: "sampleMonitor.png",
+  },
+  {
+    type: "Mouse",
+    title: "Mice",
+    fileName: "sampleMouse.png",
+  },
+];

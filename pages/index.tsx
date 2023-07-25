@@ -1,13 +1,20 @@
 import Image from "next/image";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { Inter } from "next/font/google";
-import { slides } from "@/utils/imageConstants";
+import { slides, typeImages } from "@/utils/imageConstants";
+import { bucket } from "@/utils/awsConstants";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home(props: any) {
+  const router = useRouter();
   const [slideIndex, setSlideIndex] = useState(0);
+
+  function goToCatalogueWithType() {
+    router.push("/catalogue/");
+  }
 
   return (
     <main className={`flex flex-col ${inter.className}`}>
@@ -20,7 +27,11 @@ export default function Home(props: any) {
           />
         </Head>
         <div className={"flex flex-col items-center"}>
-          <div className={"w-full h-full rounded-2xl bg-center bg-cover duration-500"}>
+          <div
+            className={
+              "w-full h-full rounded-2xl bg-center bg-cover duration-500"
+            }
+          >
             <Image
               src={slides[slideIndex]?.url}
               alt={slides[slideIndex]?.alt}
@@ -31,7 +42,7 @@ export default function Home(props: any) {
               (value: undefined, index: number) => (
                 <button
                   key={index}
-                  className={`w-20 h-3 mx-2 rounded-tl-3xl rounded-br-3xl ${
+                  className={`transition hover:scale-110 duration-300 w-20 h-3 mx-2 rounded-tl-3xl rounded-br-3xl ${
                     slideIndex === index ? "bg-black" : "bg-gray-400"
                   }`}
                   onClick={() => setSlideIndex(index)}
@@ -40,16 +51,36 @@ export default function Home(props: any) {
             )}
           </div>
           <div className={"flex flex-col px-8 py-2"}>
-            <p className={"text-2xl"}>Check our products!</p>
+            <p className={"text-2xl font-medium"}>Products we offer</p>
           </div>
           <div
             className={
-              "flex flex-col lg:flex-row flex-wrap items-center justify-between w-10/12 mb-12"
+              "flex flex-row flex-wrap items-center justify-between w-10/12 mb-12"
             }
           >
-            <div className={"flex flex-col w-80 py-48 bg-gray-400 mt-12"} />
-            <div className={"flex flex-col w-80 py-48 bg-gray-400 mt-12"} />
-            <div className={"flex flex-col w-80 py-48 bg-gray-400 mt-12"} />
+            {typeImages.map((item, index) => (
+              <button
+                key={index}
+                onClick={goToCatalogueWithType}
+                className={
+                  "flex flex-col items-center p-8 bg-white mt-6 drop-shadow-md transition hover:scale-110 duration-300"
+                }
+              >
+                <div
+                  className={
+                    "flex flex-col justify-center items-center w-[200px] h-[200px]"
+                  }
+                >
+                  <Image
+                    src={`${bucket}/landing/${item.fileName}`}
+                    height={200}
+                    width={200}
+                    alt={item.type}
+                  />
+                </div>
+                <p className={"text-xl mt-4"}>{item.title}</p>
+              </button>
+            ))}
           </div>
         </div>
       </Fragment>

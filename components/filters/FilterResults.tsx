@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useFiltersContext } from "@/pages/catalogue";
 import FilterProduct from "./FilterProduct";
 import { Laptop } from "@/types/productTypes";
-import { TEST_LAPTOPS } from "@/testData/laptops";
 import DownArrow from "@/public/arrows/down1.svg";
 
 interface FiltersProps {

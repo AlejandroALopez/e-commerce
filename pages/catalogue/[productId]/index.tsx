@@ -101,7 +101,7 @@ function ProductPage(props: ProductProps) {
               </span>
             </p>
             <button
-              className={"bg-[#D40E0E] rounded-sm py-2 px-6 drop-shadow-lg"}
+              className={"bg-[#D40E0E] rounded-sm py-2 px-6 drop-shadow-lg transition hover:scale-110 duration-300"}
               onClick={addProductToCart}
             >
               <p className={"text-white"}>Add to cart</p>
@@ -124,7 +124,7 @@ function ProductPage(props: ProductProps) {
                           className={`flex flex-col justify-center items-center w-3/12 h-24 mt-4 mr-6 rounded-sm drop-shadow-lg ${
                             isComponentActive(customProduct, compType, comp)
                               ? "bg-black"
-                              : "bg-[#F1F1F1]"
+                              : "bg-[#F1F1F1] transition hover:scale-110 duration-300"
                           }`}
                           onClick={() => {
                             if (

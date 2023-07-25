@@ -19,7 +19,7 @@ export default function ImageSelector(props: ImageSelectorProps) {
           <button
             key={index}
             onClick={() => setCurrentImageIndex(index)}
-            className={`mb-4 w-[100px] h-[100px] rounded-md border-4 p-1 ${currentImageIndex === index ? "border-[#D40E0E]": "border-gray-300"}`}
+            className={`mb-4 w-[100px] h-[100px] rounded-md border-4 p-1 transition hover:scale-110 duration-300 ${currentImageIndex === index ? "border-[#D40E0E]": "border-gray-300"}`}
           >
             <Image
               src={`${bucket}/${getFolderName(props.type)}/${props.id}/${

@@ -124,7 +124,7 @@ export function Cart() {
         <div className={"flex flex-row-reverse mb-12"}>
           <Link
             href="/checkout/payment"
-            className={"bg-[#D40E0E] py-4 px-12 rounded-lg"}
+            className={"bg-[#D40E0E] py-4 px-12 rounded-lg transition hover:scale-110 duration-300"}
           >
             <p className={"text-white text-xl"}>Checkout</p>
           </Link>
