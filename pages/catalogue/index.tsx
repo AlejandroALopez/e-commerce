@@ -58,8 +58,9 @@ export default function Catalogue(props: any) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const type = "Laptop";
-  const products = await getProductsHandler(type);
+  const { query } = context;
+  const type = query.type;
+  const products = await getProductsHandler(type as string || "");
 
   return {
     props: {

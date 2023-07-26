@@ -12,8 +12,11 @@ export default function Home(props: any) {
   const router = useRouter();
   const [slideIndex, setSlideIndex] = useState(0);
 
-  function goToCatalogueWithType() {
-    router.push("/catalogue/");
+  function goToCatalogueWithType(type: string | undefined) {
+    router.push({
+      pathname: "/catalogue",
+      query: { type: type || ""}
+    });
   }
 
   return (
@@ -61,7 +64,7 @@ export default function Home(props: any) {
             {typeImages.map((item, index) => (
               <button
                 key={index}
-                onClick={goToCatalogueWithType}
+                onClick={() => goToCatalogueWithType(item.type)}
                 className={
                   "flex flex-col items-center p-8 bg-white mt-6 drop-shadow-md transition hover:scale-110 duration-300"
                 }
