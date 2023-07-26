@@ -4,21 +4,31 @@ export const laptopMenu: Menu = {
   title: "Laptops",
   items: [
     {
+      title: "View All Laptops",
+      query: "Laptop",
+    },
+    {
       title: "ASUS Laptops",
       submenu: [
-        { title: "ASUS ROG" },
-        { title: "ASUS TUF" }
+        { title: "All ASUS Laptops" },
+        { title: "ROG Strix" },
+        { title: "ROG Zephyrus" },
       ],
     },
     {
       title: "HP Laptops",
-      submenu: null,
+      submenu: [
+        { title: "All HP Laptops" },
+        { title: "OMEN" },
+        { title: "Victus" },
+      ],
     },
     {
       title: "Dell Laptops",
       submenu: [
+        { title: "All Dell Laptops" },
         { title: "Alienware" },
-        { title: "G series" }
+        { title: "G series" },
       ],
     },
   ],
@@ -29,46 +39,31 @@ export const deskptopMenu: Menu = {
   items: [
     {
       title: "Monitors",
-      submenu: [
-        { title: "LED" },
-        { title: "4K HD" }
-      ],
+      submenu: [{ title: "LED" }, { title: "4K HD" }],
     },
     {
       title: "RAM",
-      submenu: null,
     },
     {
       title: "Graphic Cards",
-      submenu: [
-        { title: "NVIDIA GTX 3070" },
-        { title: "Titan" }
-      ],
+      submenu: [{ title: "NVIDIA GTX 3070" }, { title: "Titan" }],
     },
   ],
 };
-
 
 export const accessoriesMenu: Menu = {
   title: "Accessories",
   items: [
     {
       title: "Keyboards",
-      submenu: [
-        { title: "Gaming Keyboards" },
-        { title: "Work Keyboards" }
-      ],
+      submenu: [{ title: "Gaming Keyboards" }, { title: "Work Keyboards" }],
     },
     {
       title: "Mice",
-      submenu: null,
     },
     {
       title: "Headsets",
-      submenu: [
-        { title: "Beats Studio" },
-        { title: "Alienware" }
-      ],
+      submenu: [{ title: "Beats Studio" }, { title: "Alienware" }],
     },
   ],
 };

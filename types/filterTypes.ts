@@ -1,4 +1,4 @@
-export interface laptopActiveFilters {
+export interface productActiveFilters {
   price: {
     min: number;
     max: number;

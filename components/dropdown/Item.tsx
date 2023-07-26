@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDropdownContext } from "./Dropdown";
 import { Menu } from "@/types/menuTypes";
@@ -10,14 +11,20 @@ interface MenuProps {
 }
 
 export default function Item(props: MenuProps) {
+  const router = useRouter();
   const { menu } = props;
   const { openType, setOpenType } = useDropdownContext();
   const [activeSubtype, setActiveSubtype] = useState("");
 
+  function goToCatalogueWithType(type: string | undefined) {
+    router.push({
+      pathname: "/catalogue",
+      query: { type: type || "" },
+    });
+  }
+
   return (
-    <div
-      className={"flex flex-col"}
-    >
+    <div className={"flex flex-col"}>
       <button onMouseEnter={() => setOpenType(menu.title)}>
         <p
           className={`${
@@ -37,7 +44,10 @@ export default function Item(props: MenuProps) {
           }
         >
           {menu.items.map((item, index) => (
-            <div key={index}>
+            <button
+              key={index}
+              onClick={() => goToCatalogueWithType(item.query)}
+            >
               <div
                 className={
                   "flex flex-row items-center justify-between w-full hover:bg-[#AE0000] cursor-pointer p-2"
@@ -46,12 +56,12 @@ export default function Item(props: MenuProps) {
                 onMouseEnter={() => setActiveSubtype(item.title)}
               >
                 <h3 className={"text-white text-lg"}>{item.title}</h3>
-                <Image src={RightArrow} alt="right arrow" />
+                {item.submenu && <Image src={RightArrow} alt="right arrow" />}
               </div>
               {item.submenu && activeSubtype === item.title && (
                 <SubItem submenu={item.submenu} />
               )}
-            </div>
+            </button>
           ))}
         </div>
       )}

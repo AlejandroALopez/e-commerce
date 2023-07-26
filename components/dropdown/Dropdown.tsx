@@ -36,12 +36,12 @@ export default function DropDown() {
         <DropDownConext.Provider value={{ openType, setOpenType }}>
           <Item menu={laptopMenu} />
         </DropDownConext.Provider>
-        <DropDownConext.Provider value={{ openType, setOpenType }}>
+        {/* <DropDownConext.Provider value={{ openType, setOpenType }}>
           <Item menu={deskptopMenu} />
         </DropDownConext.Provider>
         <DropDownConext.Provider value={{ openType, setOpenType }}>
           <Item menu={accessoriesMenu} />
-        </DropDownConext.Provider>
+        </DropDownConext.Provider> */}
       </ul>
     </nav>
   );

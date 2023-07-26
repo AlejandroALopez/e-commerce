@@ -9,13 +9,13 @@ import {
 } from "react";
 import Filters from "@/components/filters/Filters";
 import FilterResults from "@/components/filters/FilterResults";
-import { laptopActiveFilters } from "@/types/filterTypes";
+import { productActiveFilters } from "@/types/filterTypes";
 import { GetServerSidePropsContext } from "next";
 import { getProductsHandler } from "@/actions/productActions";
 
 interface ContextProps {
-  activeFilters: laptopActiveFilters;
-  setActiveFilters: Dispatch<SetStateAction<laptopActiveFilters>>;
+  activeFilters: productActiveFilters;
+  setActiveFilters: Dispatch<SetStateAction<productActiveFilters>>;
 }
 
 export const FiltersContext = createContext<ContextProps>({
@@ -23,7 +23,7 @@ export const FiltersContext = createContext<ContextProps>({
     price: { min: 0, max: 100000 },
     components: {},
   },
-  setActiveFilters: (): laptopActiveFilters =>
+  setActiveFilters: (): productActiveFilters =>
     Object({
       price: { min: 0, max: 100000 },
       components: {},
@@ -31,7 +31,7 @@ export const FiltersContext = createContext<ContextProps>({
 });
 
 export default function Catalogue(props: any) {
-  const [activeFilters, setActiveFilters] = useState<laptopActiveFilters>({
+  const [activeFilters, setActiveFilters] = useState<productActiveFilters>({
     price: { min: 0, max: 100000 },
     components: {},
   });
