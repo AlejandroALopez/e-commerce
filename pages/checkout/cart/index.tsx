@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
 import { useCartContext } from "@/pages/_app";
 import { Fragment } from "react";
@@ -122,12 +121,24 @@ export function Cart() {
           </div>
         </div>
         <div className={"flex flex-row-reverse mb-12"}>
-          <Link
-            href="/checkout/payment"
-            className={"bg-[#D40E0E] py-4 px-12 rounded-lg transition hover:scale-110 duration-300"}
+          <button
+            className={
+              "bg-[#D40E0E] py-4 px-12 rounded-lg transition hover:scale-110 duration-300"
+            }
+            onClick={() => {
+              fetch("http://localhost:3000/api/create-checkout-session", {
+                method: "POST",
+                body: JSON.stringify({ cart }),
+              })
+              .then(res => res.json())
+              .then(data => {
+                window.location.href = data.session.url
+              })
+              ;
+            }}
           >
             <p className={"text-white text-xl"}>Checkout</p>
-          </Link>
+          </button>
         </div>
       </div>
     </Fragment>

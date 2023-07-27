@@ -1,7 +1,13 @@
 import Head from "next/head";
 import { Fragment, useState } from "react";
+import { useCartContext } from "@/pages/_app";
+import { moneyFormatter } from "@/utils/productConstants";
+
+import loadStripe from 'stripe';
 
 export function Payment() {
+  const { cart, setCart } = useCartContext();
+
   return (
     <Fragment>
       <Head>
@@ -15,11 +21,12 @@ export function Payment() {
         <div className={"mt-4"}>
           <p className={"text-3xl font-semibold"}>Checkout</p>
         </div>
-        <div className={"bg-orange-400 w-7/12 h-16"}/>
-        <div className={"flex flex-row bg-red-400 mt-12 h-96"}>
+        {/* Stripe */}
+        {/* <div className={"bg-orange-400 w-7/12 h-16"}/> */}
+        {/* <div className={"flex flex-row bg-red-400 mt-12 h-96"}>
           <div className={"flex flex-col bg-green-400 w-7/12 h-full"}/>
           <div className={"flex flex-col bg-yellow-400 w-4/12 h-full ml-6"}/>
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );
