@@ -1,9 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useCartContext } from "@/pages/_app";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { moneyFormatter } from "@/utils/productConstants";
 import { bucket, getFolderName } from "@/utils/awsConstants";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "@/utils/localStorageUtils";
 
 export function Cart() {
   const { cart, setCart } = useCartContext();
@@ -17,6 +21,7 @@ export function Cart() {
 
       return p;
     });
+    setLocalStorageItem("cart", updatedProducts);
     setCart(updatedProducts);
   }
 
@@ -29,6 +34,7 @@ export function Cart() {
 
       return p;
     });
+    setLocalStorageItem("cart", updatedProducts);
     setCart(updatedProducts);
   }
 
@@ -36,12 +42,21 @@ export function Cart() {
     const updatedProducts = cart.filter((p) => {
       return p.product.id !== id;
     });
+    setLocalStorageItem("cart", updatedProducts);
     setCart(updatedProducts);
   }
 
   function getTotalPrice() {
     return cart.reduce((total, p) => (total = total + p.price * p.number), 0);
   }
+
+  // Load cart from local storage on component mount
+  useEffect(() => {
+    const storedCart = getLocalStorageItem("cart");
+    if (storedCart) {
+      setCart(storedCart);
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -58,60 +73,63 @@ export function Cart() {
         <div className={"mt-4"}>
           <p className={"text-3xl font-semibold"}>Your Cart</p>
         </div>
-        {cart.map((p) => (
-          <div
-            key={p.product.id}
-            className={"flex flex-row h-60 rounded-md bg-white drop-shadow-md"}
-          >
-            {/* <div className={"bg-gray-300 w-3/12 h-full p-4"} /> */}
-            <div className={"flex justify-center items-center w-3/12 h-full"}>
-              <Image
-                src={`${bucket}/${getFolderName(p.product.type)}/${
-                  p.product.id
-                }/${p.product.images[0]}`}
-                height={200}
-                width={200}
-                alt="product image"
-              />
-            </div>
-            <div className={" w-6/12 h-full p-4"}>
-              <p className={"text-xl font-semibold"}>{p.product.title}</p>
-            </div>
+        <div className={"min-h-[12rem]"}>
+          {cart.map((p) => (
             <div
+              key={p.product.id}
               className={
-                "flex flex-row-reverse justify-between w-4/12 h-full p-4"
+                "flex flex-row h-60 rounded-md bg-white drop-shadow-md"
               }
             >
-              <div className={"flex flex-col items-end"}>
-                <p className={"text-xl font-semibold"}>
-                  {moneyFormatter.format(p.price)}
-                </p>
-                <button onClick={() => removeProduct(p.product.id)}>
-                  <p className={"text-blue-400"}>Remove</p>
-                </button>
+              <div className={"flex justify-center items-center w-3/12 h-full"}>
+                <Image
+                  src={`${bucket}/${getFolderName(p.product.type)}/${
+                    p.product.id
+                  }/${p.product.images[0]}`}
+                  height={200}
+                  width={200}
+                  alt="product image"
+                />
+              </div>
+              <div className={" w-6/12 h-full p-4"}>
+                <p className={"text-xl font-semibold"}>{p.product.title}</p>
               </div>
               <div
                 className={
-                  "flex flex-row items-center justify-center gap-8 h-fit w-40"
+                  "flex flex-row-reverse flex-wrap justify-between w-4/12 h-full p-4"
                 }
               >
-                <button
-                  disabled={p.number === 1}
-                  onClick={() => decreaseProductCount(p.product.id)}
+                <div className={"flex flex-col items-end"}>
+                  <p className={"text-xl font-semibold"}>
+                    {moneyFormatter.format(p.price)}
+                  </p>
+                  <button onClick={() => removeProduct(p.product.id)}>
+                    <p className={"text-blue-400"}>Remove</p>
+                  </button>
+                </div>
+                <div
+                  className={
+                    "flex flex-row items-center justify-center gap-8 h-fit w-40"
+                  }
                 >
-                  <p className={"text-3xl text-gray-400"}>-</p>
-                </button>
-                <p className={"text-xl"}>{p.number}</p>
-                <button
-                  disabled={p.number === 99}
-                  onClick={() => increaseProductCount(p.product.id)}
-                >
-                  <p className={"text-3xl text-gray-400"}>+</p>
-                </button>
+                  <button
+                    disabled={p.number === 1}
+                    onClick={() => decreaseProductCount(p.product.id)}
+                  >
+                    <p className={"text-3xl text-gray-400"}>-</p>
+                  </button>
+                  <p className={"text-xl"}>{p.number}</p>
+                  <button
+                    disabled={p.number === 99}
+                    onClick={() => increaseProductCount(p.product.id)}
+                  >
+                    <p className={"text-3xl text-gray-400"}>+</p>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <div className={"flex flex-row-reverse"}>
           <div className={"flex flex-row items justify-end gap-10 w-1/2"}>
             <p className={"text-4xl font-semibold"}>Total: </p>
@@ -122,19 +140,21 @@ export function Cart() {
         </div>
         <div className={"flex flex-row-reverse mb-12"}>
           <button
-            className={
-              "bg-[#D40E0E] py-4 px-12 rounded-lg transition hover:scale-110 duration-300"
-            }
+            className={`bg-[#D40E0E] py-4 px-12 rounded-lg ${
+              cart.length === 0
+                ? "opacity-50"
+                : "transition hover:scale-110 duration-300"
+            }`}
+            disabled={cart.length === 0}
             onClick={() => {
               fetch("http://localhost:3000/api/create-checkout-session", {
                 method: "POST",
                 body: JSON.stringify({ cart }),
               })
-              .then(res => res.json())
-              .then(data => {
-                window.location.href = data.session.url
-              })
-              ;
+                .then((res) => res.json())
+                .then((data) => {
+                  window.location.href = data.session.url;
+                });
             }}
           >
             <p className={"text-white text-xl"}>Checkout</p>

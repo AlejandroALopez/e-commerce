@@ -7,8 +7,13 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
 } from "react";
 import { CartElement } from "@/types/cartTypes";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "@/utils/localStorageUtils";
 
 interface ContextProps {
   cart: CartElement[];
@@ -22,6 +27,14 @@ export const CartContext = createContext<ContextProps>({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [cart, setCart] = useState<CartElement[]>([]);
+
+  // Load cart from local storage on component mount
+  useEffect(() => {
+    const storedCart = getLocalStorageItem("cart");
+    if (storedCart) {
+      setCart(storedCart);
+    }
+  }, []);
 
   return (
     <Layout>

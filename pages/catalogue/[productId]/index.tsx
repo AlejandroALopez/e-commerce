@@ -11,6 +11,7 @@ import {
   costDifferenceFormatter,
 } from "@/utils/productConstants";
 import { getOneProductHandler } from "@/actions/productActions";
+import { setLocalStorageItem } from "@/utils/localStorageUtils";
 
 interface ProductProps {
   productData: Laptop;
@@ -66,11 +67,12 @@ function ProductPage(props: ProductProps) {
     const prod = {
       number: 1,
       price: currentPrice,
-      product: customProduct
+      product: customProduct,
     };
+    setLocalStorageItem("cart", [...cart, prod]); // save new cart in local storage
     setCart((prevCart) => [...prevCart, prod]);
     router.back();
-  };
+  }
 
   return (
     <Fragment>
@@ -86,7 +88,11 @@ function ProductPage(props: ProductProps) {
           <div className={"w-full my-6 p-5 bg-white drop-shadow-lg"}>
             <p className={"text-3xl"}>{props.productData.title}</p>
           </div>
-          <ImageSelector id={props.productData.id} type={props.productData.type} images={props.productData.images}/>
+          <ImageSelector
+            id={props.productData.id}
+            type={props.productData.type}
+            images={props.productData.images}
+          />
         </div>
         <div className={"w-1/2"}>
           <div
@@ -101,7 +107,9 @@ function ProductPage(props: ProductProps) {
               </span>
             </p>
             <button
-              className={"bg-[#D40E0E] rounded-sm py-2 px-6 drop-shadow-lg transition hover:scale-110 duration-300"}
+              className={
+                "bg-[#D40E0E] rounded-sm py-2 px-6 drop-shadow-lg transition hover:scale-110 duration-300"
+              }
               onClick={addProductToCart}
             >
               <p className={"text-white"}>Add to cart</p>
@@ -174,9 +182,7 @@ export default ProductPage;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { productId } = context.query;
 
-  const selectedProduct = await getOneProductHandler(
-    productId as string,
-  );
+  const selectedProduct = await getOneProductHandler(productId as string);
 
   return {
     props: {
