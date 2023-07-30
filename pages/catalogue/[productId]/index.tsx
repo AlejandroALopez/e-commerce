@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useCartContext } from "@/pages/_app";
 import ImageSelector from "@/components/product/ImageSelector";
-import { Laptop, Component } from "@/types/productTypes";
+import { Product, Component } from "@/types/productTypes";
 import {
   moneyFormatter,
   firstLetterUpercase,
@@ -14,7 +14,7 @@ import { getOneProductHandler } from "@/actions/productActions";
 import { setLocalStorageItem } from "@/utils/localStorageUtils";
 
 interface ProductProps {
-  productData: Laptop;
+  productData: Product;
 }
 
 function ProductPage(props: ProductProps) {
@@ -23,11 +23,13 @@ function ProductPage(props: ProductProps) {
   const [currentPrice, setCurrentPrice] = useState<number>(
     props.productData.basePrice
   );
-  const [customProduct, setCustomProduct] = useState<Laptop>(props.productData);
+  const [customProduct, setCustomProduct] = useState<Product>(
+    props.productData
+  );
 
   // Check if the component is contained in the product's current components
   function isComponentActive(
-    product: Laptop,
+    product: Product,
     componentType: string,
     component: Component
   ) {
@@ -117,59 +119,76 @@ function ProductPage(props: ProductProps) {
           </div>
           <div className={"flex flex-col w-full"}>
             {/* for all types of available components */}
-            {Object.keys(props.productData.availableComponents).map(
-              (compType, index) => {
-                const components =
-                  props.productData.availableComponents[compType];
-                return (
-                  <div key={index} className={"p-4 bg-white drop-shadow-lg"}>
-                    <p className={"text-xl"}>{firstLetterUpercase(compType)}</p>
-                    <div className={"flex flex-row flex-wrap"}>
-                      {/* render each option for this component type */}
-                      {components.map((comp, i) => (
-                        <button
-                          key={i}
-                          className={`flex flex-col justify-center items-center w-3/12 h-24 mt-4 mr-6 rounded-sm drop-shadow-lg ${
-                            isComponentActive(customProduct, compType, comp)
-                              ? "bg-black"
-                              : "bg-[#F1F1F1] transition hover:scale-110 duration-300"
-                          }`}
-                          onClick={() => {
-                            if (
-                              !isComponentActive(customProduct, compType, comp)
-                            )
-                              handleSelectComponent(compType, comp);
-                          }}
-                        >
-                          <p
-                            className={`text-xl ${
-                              isComponentActive(customProduct, compType, comp)
-                                ? "text-white"
-                                : "text-black"
-                            }`}
-                          >
-                            {comp.name}
-                          </p>
-                          {/* Text with price difference */}
-                          {!isComponentActive(
-                            customProduct,
-                            compType,
-                            comp
-                          ) && (
-                            <p className={`text-md text-gray-400`}>
-                              {costDifferenceFormatter(
-                                customProduct.baseComponents[compType].price,
-                                comp.price
+            {props.productData.availableComponents &&
+              Object.keys(props.productData.availableComponents).map(
+                (compType, index) => {
+                  if (props.productData.availableComponents) {
+                    const components =
+                      props.productData.availableComponents[compType];
+                    return (
+                      <div
+                        key={index}
+                        className={"p-4 bg-white drop-shadow-lg"}
+                      >
+                        <p className={"text-xl"}>
+                          {firstLetterUpercase(compType)}
+                        </p>
+                        <div className={"flex flex-row flex-wrap"}>
+                          {/* render each option for this component type */}
+                          {components.map((comp, i) => (
+                            <button
+                              key={i}
+                              className={`flex flex-col justify-center items-center w-3/12 h-24 mt-4 mr-6 rounded-sm drop-shadow-lg ${
+                                isComponentActive(customProduct, compType, comp)
+                                  ? "bg-black"
+                                  : "bg-[#F1F1F1] transition hover:scale-110 duration-300"
+                              }`}
+                              onClick={() => {
+                                if (
+                                  !isComponentActive(
+                                    customProduct,
+                                    compType,
+                                    comp
+                                  )
+                                )
+                                  handleSelectComponent(compType, comp);
+                              }}
+                            >
+                              <p
+                                className={`text-xl ${
+                                  isComponentActive(
+                                    customProduct,
+                                    compType,
+                                    comp
+                                  )
+                                    ? "text-white"
+                                    : "text-black"
+                                }`}
+                              >
+                                {comp.name}
+                              </p>
+                              {/* Text with price difference */}
+                              {!isComponentActive(
+                                customProduct,
+                                compType,
+                                comp
+                              ) && (
+                                <p className={`text-md text-gray-400`}>
+                                  {costDifferenceFormatter(
+                                    customProduct.baseComponents[compType]
+                                      .price,
+                                    comp.price
+                                  )}
+                                </p>
                               )}
-                            </p>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                );
-              }
-            )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+                }
+              )}
           </div>
         </div>
       </div>
@@ -193,7 +212,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         basePrice: selectedProduct?.basePrice,
         images: selectedProduct?.images,
         baseComponents: selectedProduct?.baseComponents,
-        availableComponents: selectedProduct?.availableComponents,
+        availableComponents: selectedProduct?.availableComponents || null,
       },
     },
   };
