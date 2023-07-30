@@ -13,3 +13,9 @@ export interface PriceFilters {
   min: number,
   max: number,
 }
+
+export interface ComponentFilters {
+  title: string, // text to display
+  alias: string, // text for filtering
+  options: string[],
+}

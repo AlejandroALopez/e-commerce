@@ -2,18 +2,18 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useFiltersContext } from "@/pages/catalogue";
 import FilterProduct from "./FilterProduct";
-import { Laptop } from "@/types/productTypes";
+import { Product } from "@/types/productTypes";
 import DownArrow from "@/public/arrows/down1.svg";
 
 interface FiltersProps {
-  products: Laptop[] | any[],
+  products: Product[] | any[],
 }
 
 export default function Filters(props: FiltersProps) {
   const { activeFilters, setActiveFilters } = useFiltersContext();
-  const [results, setResults] = useState<Laptop[]>(props.products);
+  const [results, setResults] = useState<Product[]>(props.products);
 
-  function filterHelper(element: Laptop) {
+  function filterHelper(element: Product) {
     let filtered: boolean = true;
 
     if (
@@ -41,7 +41,7 @@ export default function Filters(props: FiltersProps) {
 
   useEffect(() => {
     // when filters change, filter laptops array
-    setResults(props.products.filter((laptop: Laptop) => filterHelper(laptop)));
+    setResults(props.products.filter((product: Product) => filterHelper(product)));
   }, [activeFilters]);
 
   function handleSort() {

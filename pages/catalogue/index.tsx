@@ -47,10 +47,10 @@ export default function Catalogue(props: any) {
       </Head>
       <div className={"flex flex-row bg-[#F5F5F5] justify-evenly"}>
         <FiltersContext.Provider value={{ activeFilters, setActiveFilters }}>
-          <Filters />
+          <Filters type={props.type}/>
         </FiltersContext.Provider>
         <FiltersContext.Provider value={{ activeFilters, setActiveFilters }}>
-          <FilterResults products={props.products}/>
+          <FilterResults products={props.products} />
         </FiltersContext.Provider>
       </div>
     </Fragment>
@@ -60,10 +60,11 @@ export default function Catalogue(props: any) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
   const type = query.type;
-  const products = await getProductsHandler(type as string || "");
+  const products = await getProductsHandler((type as string) || "");
 
   return {
     props: {
+      type: type, // for different filters
       products: products.map((product: any) => ({
         id: product._id.toString(),
         title: product.title,
@@ -71,7 +72,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         basePrice: product.basePrice,
         images: product.images,
         baseComponents: product.baseComponents,
-        availableComponents: product.availableComponents,
+        availableComponents: product.availableComponents || null,
       })),
     },
   };

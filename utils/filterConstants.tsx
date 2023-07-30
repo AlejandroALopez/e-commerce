@@ -1,5 +1,6 @@
-import { PriceFilters } from "@/types/filterTypes";
+import { PriceFilters, ComponentFilters } from "@/types/filterTypes";
 
+// TODO: Make different filters for each type
 export const priceFilters: PriceFilters[] = [
   {
     name: "$1000 or less",
@@ -23,7 +24,30 @@ export const priceFilters: PriceFilters[] = [
   },
 ];
 
-export const laptopFilters = [
+export const micePriceFilters: PriceFilters[] = [
+  {
+    name: "$20 or less",
+    min: 0,
+    max: 20,
+  },
+  {
+    name: "$21 - $60",
+    min: 21,
+    max: 60,
+  },
+  {
+    name: "$61 - $100",
+    min: 61,
+    max: 100,
+  },
+  {
+    name: "$101 - $150",
+    min: 101,
+    max: 150,
+  },
+];
+
+export const laptopFilters: ComponentFilters[] = [
   {
     title: "Brand",
     alias: "brand",
@@ -69,5 +93,31 @@ export const laptopFilters = [
       "NVIDIA GeForce RTX 4080, 12GB",
       "NVIDIA GeForce RTX 4090, 16GB",
     ],
+  },
+];
+
+export const miceFilters: ComponentFilters[] = [
+  {
+    title: "Brand",
+    alias: "brand",
+    options: ["Logitech", "Dell", "Lenovo", "Alienware"],
+  },
+  {
+    title: "# of buttons",
+    alias: "buttons",
+    options: ["4", "7"],
+  },
+  {
+    title: "Movement Resolution (DPI)",
+    alias: "dpi",
+    options: ["1000", "1600", "16000"],
+  },
+];
+
+export const keyboardFilters: ComponentFilters[] = [
+  {
+    title: "Brand",
+    alias: "brand",
+    options: ["Logitech", "Dell", "Lenovo", "Alienware"],
   },
 ];

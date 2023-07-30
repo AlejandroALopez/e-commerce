@@ -5,10 +5,10 @@ export function getFolderName(type: string): string {
   switch (type) {
     case "Laptop":
       return "laptops";
-    case "Accessory":
-      return "accessories";
-    case "Desktop":
-      return "desktop";
+    case "Mouse":
+      return "mice";
+    case "Keyboard":
+      return "keyboards";
     default:
       return "";
   }

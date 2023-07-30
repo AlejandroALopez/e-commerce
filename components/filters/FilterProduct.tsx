@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Laptop } from "@/types/productTypes";
+import { Product } from "@/types/productTypes";
 import { moneyFormatter } from "@/utils/productConstants";
 import { bucket, getFolderName } from "@/utils/awsConstants";
 
 interface FilterProductProps {
-  product: Laptop; // replace with laptop / product type
+  product: Product;
 }
 
 export default function FilterProduct(props: FilterProductProps) {
@@ -31,7 +31,7 @@ export default function FilterProduct(props: FilterProductProps) {
           alt="laptop"
         />
       </div>
-      <p className={"text-2xl h-20 text-center"}>{props.product.title}</p>
+      <p className={"text-xl h-20 text-center font-medium"}>{props.product.title}</p>
       <div className={"flex flex-col items-start w-3/4 my-6"}>
         <p>- Detail A</p>
         <p>- Detail B</p>

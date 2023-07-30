@@ -3,7 +3,7 @@ export interface Component {
   price: number;
 }
 
-export interface Laptop {
+export interface Product {
   id: string;
   title: string;
   type: string;
@@ -12,7 +12,7 @@ export interface Laptop {
   baseComponents: {
     [key: string]: Component;
   };
-  availableComponents: {
+  availableComponents?: {
     [key: string]: Component[];
   };
 }

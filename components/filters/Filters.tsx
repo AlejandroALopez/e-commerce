@@ -1,12 +1,21 @@
 import Image from "next/image";
-import { laptopFilters, priceFilters } from "@/utils/filterConstants";
+import { useEffect, useState } from "react";
+import { laptopFilters, miceFilters, priceFilters, micePriceFilters } from "@/utils/filterConstants";
+import { PriceFilters, ComponentFilters } from "@/types/filterTypes";
 import { useFiltersContext } from "@/pages/catalogue";
 import CheckIcon from "@/public/buttons/check.svg";
-import { useState } from "react";
 
-export default function Filters() {
+interface FiltersProps {
+  type: string
+}
+
+export default function Filters(props: FiltersProps) {
   const { activeFilters, setActiveFilters } = useFiltersContext();
   const [activePriceFilter, setActivePriceFilter] = useState("");
+
+  // interchangable filters, depending on product type
+  const [availablePriceFilters, setAvailablePriceFilters] = useState<PriceFilters[]>([]);
+  const [availableComponentFilters, setAvailableComponentFilters] = useState<ComponentFilters[]>([]);
 
   function isComponentInFilters(alias: string, option: string): boolean {
     return (
@@ -32,7 +41,7 @@ export default function Filters() {
   }
 
   // handler for removing an option to the filter, adding a key if needed
-  function removeFilter(alias: string, option: string) {
+  function removeFilter(alias: string, option: string | number) {
     let copyObject = { ...activeFilters };
     let copyArray = [...activeFilters.components[alias]];
     if (copyArray.length === 1) {
@@ -51,6 +60,15 @@ export default function Filters() {
       }));
     }
   }
+
+  useEffect(() => {
+    if(props.type === "Mouse") {
+      setAvailablePriceFilters(micePriceFilters);
+      setAvailableComponentFilters(miceFilters);
+    } else {
+      setAvailablePriceFilters(priceFilters);
+      setAvailableComponentFilters(laptopFilters);
+    }}, [props.type]);
 
   return (
     <div
@@ -87,7 +105,7 @@ export default function Filters() {
       {/* price filters */}
       <div>
         <p className={"text-xl"}>By Price</p>
-        {priceFilters.map((filter, index) => (
+        {availablePriceFilters.map((filter, index) => (
           <div key={index} className={"flex flex-row items-center my-2"}>
             <button
               onClick={() => {
@@ -122,7 +140,7 @@ export default function Filters() {
         ))}
       </div>
       {/* other filters */}
-      {laptopFilters.map((filter, index) => (
+      {availableComponentFilters.map((filter, index) => (
         <div key={index}>
           <p className={"text-xl"}>By {filter.title}</p>
           {filter.options?.map((option, i) => (
