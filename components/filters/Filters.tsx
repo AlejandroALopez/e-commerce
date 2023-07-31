@@ -1,12 +1,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { laptopFilters, miceFilters, priceFilters, micePriceFilters } from "@/utils/filterConstants";
+import {
+  laptopFilters,
+  miceFilters,
+  priceFilters,
+  micePriceFilters,
+  keyboardFilters,
+  keyboardPriceFilters,
+} from "@/utils/filterConstants";
 import { PriceFilters, ComponentFilters } from "@/types/filterTypes";
 import { useFiltersContext } from "@/pages/catalogue";
 import CheckIcon from "@/public/buttons/check.svg";
 
 interface FiltersProps {
-  type: string
+  type: string;
 }
 
 export default function Filters(props: FiltersProps) {
@@ -14,8 +21,12 @@ export default function Filters(props: FiltersProps) {
   const [activePriceFilter, setActivePriceFilter] = useState("");
 
   // interchangable filters, depending on product type
-  const [availablePriceFilters, setAvailablePriceFilters] = useState<PriceFilters[]>([]);
-  const [availableComponentFilters, setAvailableComponentFilters] = useState<ComponentFilters[]>([]);
+  const [availablePriceFilters, setAvailablePriceFilters] = useState<
+    PriceFilters[]
+  >([]);
+  const [availableComponentFilters, setAvailableComponentFilters] = useState<
+    ComponentFilters[]
+  >([]);
 
   function isComponentInFilters(alias: string, option: string): boolean {
     return (
@@ -62,13 +73,17 @@ export default function Filters(props: FiltersProps) {
   }
 
   useEffect(() => {
-    if(props.type === "Mouse") {
+    if (props.type === "Mouse") {
       setAvailablePriceFilters(micePriceFilters);
       setAvailableComponentFilters(miceFilters);
+    } else if (props.type === "Keyboard") {
+      setAvailablePriceFilters(keyboardPriceFilters);
+      setAvailableComponentFilters(keyboardFilters);
     } else {
       setAvailablePriceFilters(priceFilters);
       setAvailableComponentFilters(laptopFilters);
-    }}, [props.type]);
+    }
+  }, [props.type]);
 
   return (
     <div

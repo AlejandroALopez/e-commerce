@@ -52,3 +52,19 @@ export const miceMenu: Menu = {
     },
   ],
 };
+
+export const keyboardsMenu: Menu = {
+  title: "Keyboards",
+  items: [
+    {
+      title: "View All Keyboards",
+      query: "Keyboard",
+    },
+    {
+      title: "Dell Keyboards",
+    },
+    {
+      title: "Logitech Keyboards",
+    },
+  ],
+};

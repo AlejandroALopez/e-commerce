@@ -5,7 +5,7 @@ import {
   createContext,
   useContext
 } from "react";
-import { laptopMenu, miceMenu } from "@/utils/menuItems";
+import { laptopMenu, miceMenu, keyboardsMenu } from "@/utils/menuItems";
 import Item from "./Item";
 
 interface ContextProps {
@@ -38,6 +38,9 @@ export default function DropDown() {
         </DropDownConext.Provider>
         <DropDownConext.Provider value={{ openType, setOpenType }}>
           <Item menu={miceMenu} />
+        </DropDownConext.Provider>
+        <DropDownConext.Provider value={{ openType, setOpenType }}>
+          <Item menu={keyboardsMenu} />
         </DropDownConext.Provider>
       </ul>
     </nav>
