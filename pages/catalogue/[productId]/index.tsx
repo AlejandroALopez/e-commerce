@@ -73,7 +73,7 @@ function ProductPage(props: ProductProps) {
     };
     setLocalStorageItem("cart", [...cart, prod]); // save new cart in local storage
     setCart((prevCart) => [...prevCart, prod]);
-    router.back();
+    router.push("/checkout/cart");
   }
 
   return (

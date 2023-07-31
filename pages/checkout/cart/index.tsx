@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useCartContext } from "@/pages/_app";
+import { useRouter } from "next/router";
 import { Fragment, useEffect } from "react";
+import { useCartContext } from "@/pages/_app";
 import { moneyFormatter } from "@/utils/productConstants";
 import { bucket, getFolderName } from "@/utils/awsConstants";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@/utils/localStorageUtils";
 
 export function Cart() {
+  const router = useRouter();
   const { cart, setCart } = useCartContext();
 
   // Increase number of orders of a product in cart by one
@@ -71,6 +73,9 @@ export function Cart() {
         className={"flex flex-col gap-8 bg-[#F5F5F5] justify-evenly px-12 py-4"}
       >
         <div className={"mt-4"}>
+          <button className={"mb-2"} onClick={() => router.back()}>
+            <p className={"text-xl text-gray-400 hover:text-[#D40E0E]"}>&lt; Keep shopping</p>
+          </button>
           <p className={"text-3xl font-semibold"}>Your Cart</p>
         </div>
         <div className={"min-h-[12rem]"}>
@@ -83,9 +88,8 @@ export function Cart() {
             >
               <div className={"flex justify-center items-center w-3/12 h-full"}>
                 <Image
-                  src={`${bucket}/${getFolderName(p.product.type)}/${
-                    p.product.id
-                  }/${p.product.images[0]}`}
+                  src={`${bucket}/${getFolderName(p.product.type)}/${p.product.id
+                    }/${p.product.images[0]}`}
                   height={200}
                   width={200}
                   alt="product image"
@@ -140,11 +144,10 @@ export function Cart() {
         </div>
         <div className={"flex flex-row-reverse mb-12"}>
           <button
-            className={`bg-[#D40E0E] py-4 px-12 rounded-lg ${
-              cart.length === 0
+            className={`bg-[#D40E0E] py-4 px-12 rounded-lg ${cart.length === 0
                 ? "opacity-50"
                 : "transition hover:scale-110 duration-300"
-            }`}
+              }`}
             disabled={cart.length === 0}
             onClick={() => {
               fetch("http://localhost:3000/api/create-checkout-session", {
