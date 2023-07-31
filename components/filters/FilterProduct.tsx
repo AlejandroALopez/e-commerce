@@ -18,7 +18,7 @@ export default function FilterProduct(props: FilterProductProps) {
   return (
     <div
       className={
-        "flex flex-col items-center w-[32%] my-4 p-4 bg-white drop-shadow-lg"
+        "flex flex-col items-center w-72 my-4 p-4 bg-white drop-shadow-lg"
       }
     >
       <div className={"flex items-center w-[160px] h-[160px]"}>

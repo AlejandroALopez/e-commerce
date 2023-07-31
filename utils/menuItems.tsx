@@ -34,36 +34,21 @@ export const laptopMenu: Menu = {
   ],
 };
 
-export const deskptopMenu: Menu = {
-  title: "Desktop",
+export const miceMenu: Menu = {
+  title: "Mice",
   items: [
     {
-      title: "Monitors",
-      submenu: [{ title: "LED" }, { title: "4K HD" }],
+      title: "View All Mice",
+      query: "Mouse",
     },
     {
-      title: "RAM",
+      title: "Dell Mice",
     },
     {
-      title: "Graphic Cards",
-      submenu: [{ title: "NVIDIA GTX 3070" }, { title: "Titan" }],
-    },
-  ],
-};
-
-export const accessoriesMenu: Menu = {
-  title: "Accessories",
-  items: [
-    {
-      title: "Keyboards",
-      submenu: [{ title: "Gaming Keyboards" }, { title: "Work Keyboards" }],
+      title: "Logitech Mice",
     },
     {
-      title: "Mice",
-    },
-    {
-      title: "Headsets",
-      submenu: [{ title: "Beats Studio" }, { title: "Alienware" }],
+      title: "Lenovo mICE",
     },
   ],
 };
