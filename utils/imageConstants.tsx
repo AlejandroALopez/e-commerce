@@ -31,9 +31,9 @@ export const typeImages = [
     fileName: "sampleLaptop.png",
   },
   {
-    type: "Monitor",
-    title: "Monitors",
-    fileName: "sampleMonitor.png",
+    type: "Keyboard",
+    title: "Keyboards",
+    fileName: "sampleKeyboard.png",
   },
   {
     type: "Mouse",

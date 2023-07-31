@@ -68,3 +68,22 @@ export const keyboardsMenu: Menu = {
     },
   ],
 };
+
+export const headsetsMenu: Menu = {
+  title: "Headsets",
+  items: [
+    {
+      title: "View All Headsets",
+      query: "Headset",
+    },
+    {
+      title: "Dell Headsets",
+    },
+    {
+      title: "Alienware Headsets",
+    },
+    {
+      title: "Logitech Headsets",
+    },
+  ],
+};

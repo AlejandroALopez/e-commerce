@@ -7,6 +7,8 @@ import {
   micePriceFilters,
   keyboardFilters,
   keyboardPriceFilters,
+  headsetPriceFilters,
+  headsetFilters,
 } from "@/utils/filterConstants";
 import { PriceFilters, ComponentFilters } from "@/types/filterTypes";
 import { useFiltersContext } from "@/pages/catalogue";
@@ -73,15 +75,23 @@ export default function Filters(props: FiltersProps) {
   }
 
   useEffect(() => {
-    if (props.type === "Mouse") {
-      setAvailablePriceFilters(micePriceFilters);
-      setAvailableComponentFilters(miceFilters);
-    } else if (props.type === "Keyboard") {
-      setAvailablePriceFilters(keyboardPriceFilters);
-      setAvailableComponentFilters(keyboardFilters);
-    } else {
-      setAvailablePriceFilters(priceFilters);
-      setAvailableComponentFilters(laptopFilters);
+    switch (props.type) {
+      case "Mouse":
+        setAvailablePriceFilters(micePriceFilters);
+        setAvailableComponentFilters(miceFilters);
+        break;
+      case "Keyboard":
+        setAvailablePriceFilters(keyboardPriceFilters);
+        setAvailableComponentFilters(keyboardFilters);
+        break;
+      case "Headset":
+        setAvailablePriceFilters(headsetPriceFilters);
+        setAvailableComponentFilters(headsetFilters);
+        break;
+      default:
+        setAvailablePriceFilters(priceFilters);
+        setAvailableComponentFilters(laptopFilters);
+        break;
     }
   }, [props.type]);
 
@@ -138,11 +148,10 @@ export default function Filters(props: FiltersProps) {
                   }));
                 }
               }}
-              className={`rounded-md border-black border-[1.5px] mr-2 ${
-                filter.name === activePriceFilter
+              className={`rounded-md border-black border-[1.5px] mr-2 ${filter.name === activePriceFilter
                   ? "bg-black p-1"
                   : "bg-white p-3"
-              }`}
+                }`}
             >
               {filter.name === activePriceFilter && (
                 <div className={"relative w-[16px] h-[16px]"}>
@@ -161,11 +170,10 @@ export default function Filters(props: FiltersProps) {
           {filter.options?.map((option, i) => (
             <div key={i} className={"flex flex-row items-center my-2"}>
               <button
-                className={`rounded-md border-black border-[1.5px] mr-2 ${
-                  isComponentInFilters(filter.alias, option)
+                className={`rounded-md border-black border-[1.5px] mr-2 ${isComponentInFilters(filter.alias, option)
                     ? "bg-black p-1"
                     : "bg-white p-3"
-                }`}
+                  }`}
                 onClick={() => {
                   if (isComponentInFilters(filter.alias, option)) {
                     removeFilter(filter.alias, option);

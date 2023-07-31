@@ -26,12 +26,12 @@ export default function Navigation() {
             "flex items-center w-[30px] h-[30px] transition hover:scale-110 duration-300"
           }
         >
+          <Image src={CartIcon} height={30} width={30} alt="cart"></Image>
           {cart.length > 0 && (
-            <div className={"px-3 py-1 mr-2 rounded-full bg-[#D40E0E]"}>
+            <div className={"px-3 py-1 ml-2 rounded-full bg-[#D40E0E]"}>
               <p className={"text-white"}>{cart.length}</p>
             </div>
           )}
-          <Image src={CartIcon} height={30} width={30} alt="cart"></Image>
         </Link>
       </div>
     </div>
