@@ -7,10 +7,10 @@ import {
   Fragment,
   useContext,
 } from "react";
+import { GetServerSidePropsContext } from "next";
 import Filters from "@/components/filters/Filters";
 import FilterResults from "@/components/filters/FilterResults";
 import { productActiveFilters } from "@/types/filterTypes";
-import { GetServerSidePropsContext } from "next";
 import { getProductsHandler } from "@/actions/productActions";
 
 interface ContextProps {
@@ -31,6 +31,7 @@ export const FiltersContext = createContext<ContextProps>({
 });
 
 export default function Catalogue(props: any) {
+  const [currentProducts, setCurrentProducts] = useState([]); // for product refresh upon chaging type query
   const [activeFilters, setActiveFilters] = useState<productActiveFilters>({
     price: { min: 0, max: 100000 },
     components: {},
@@ -47,7 +48,7 @@ export default function Catalogue(props: any) {
       </Head>
       <div className={"flex flex-row bg-[#F5F5F5] justify-evenly"}>
         <FiltersContext.Provider value={{ activeFilters, setActiveFilters }}>
-          <Filters type={props.type}/>
+          <Filters type={props.type} />
         </FiltersContext.Provider>
         <FiltersContext.Provider value={{ activeFilters, setActiveFilters }}>
           <FilterResults products={props.products} />
@@ -59,8 +60,8 @@ export default function Catalogue(props: any) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context;
-  const type = query.type;
-  const products = await getProductsHandler((type as string) || "");
+  const type = query.type || "Laptop"; // avoid error when no query selected
+  const products = await getProductsHandler((type as string) || "Laptop");
 
   return {
     props: {

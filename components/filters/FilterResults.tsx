@@ -40,9 +40,9 @@ export default function Filters(props: FiltersProps) {
   }
 
   useEffect(() => {
-    // when filters change, filter laptops array
+    // when filters or query change, update products' array
     setResults(props.products.filter((product: Product) => filterHelper(product)));
-  }, [activeFilters]);
+  }, [activeFilters, props.products]);
 
   // function handleSort() {
   //   console.log("TODO: Sort by options");
