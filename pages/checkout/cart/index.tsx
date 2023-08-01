@@ -149,8 +149,8 @@ export function Cart() {
                 : "transition hover:scale-110 duration-300"
               }`}
             disabled={cart.length === 0}
-            onClick={() => {
-              fetch("http://localhost:3000/api/create-checkout-session", {
+            onClick={() => { // use localhost:3000 when testing locally
+              fetch("http://afk-ecommerce.vercel.app/api/create-checkout-session", {
                 method: "POST",
                 body: JSON.stringify({ cart }),
               })
