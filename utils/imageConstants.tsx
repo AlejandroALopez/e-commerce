@@ -1,24 +1,46 @@
-import Image1 from "@/public/images/frontImage1.webp";
-import Image2 from "@/public/images/frontImage2.webp";
-import Image3 from "@/public/images/frontImage3.webp";
+import { StaticImageData } from "next/image";
+import Image1 from "@/public/images/frontImage1.png";
+import Image2 from "@/public/images/frontImage2.png";
+import Image3 from "@/public/images/frontImage3.png";
+import Image4 from "@/public/images/frontImage4.png";
 
-export const slides = [
+interface Slide {
+  alt: string,
+  url: StaticImageData,
+  route: string,
+}
+
+interface TypeImage {
+  type: string,
+  title: string,
+  fileName: string,
+}
+
+export const slides: Slide[] = [
   // for the image carousel on the landing page
   {
-    alt: "slide 1",
+    alt: "ASUS ROG Zephyrus G14",
     url: Image1,
+    route: "/64bee0aee9e9389f14f2ed01"
   },
   {
-    alt: "slide 2",
+    alt: "Headsets",
     url: Image2,
+    route: "?type=Headset"
   },
   {
-    alt: "slide 3",
+    alt: "AW610M Mouse",
     url: Image3,
+    route: "/64c6edacc2789f8a631ad704"
+  },
+  {
+    alt: "Keyboards",
+    url: Image4,
+    route: "?type=Keyboard"
   },
 ];
 
-export const typeImages = [
+export const typeImages: TypeImage[] = [
   // for the product type buttons on the landing page
   {
     type: "Headset",
