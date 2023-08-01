@@ -32,8 +32,8 @@ export default async function handler(
     line_items: [...lineItems],
     mode: "payment",
     payment_method_types: ["card"], // use localhost:3000 when testing locally
-    success_url: 'http://afk-ecommerce.vercel.app' + "?status=success",
-    cancel_url: 'http://afk-ecommerce.vercel.app/checkout/cart' + "?status=cancel",
+    success_url: 'https://afk-ecommerce.vercel.app' + "?status=success",
+    cancel_url: 'https://afk-ecommerce.vercel.app/checkout/cart' + "?status=cancel",
   });
 
   res.status(200).json({ session });

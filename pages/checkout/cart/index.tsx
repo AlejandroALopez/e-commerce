@@ -150,7 +150,7 @@ export function Cart() {
               }`}
             disabled={cart.length === 0}
             onClick={() => { // use localhost:3000 when testing locally
-              fetch("http://afk-ecommerce.vercel.app/api/create-checkout-session", {
+              fetch("https://afk-ecommerce.vercel.app/api/create-checkout-session", {
                 method: "POST",
                 body: JSON.stringify({ cart }),
               })
