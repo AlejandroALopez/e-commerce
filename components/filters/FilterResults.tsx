@@ -40,13 +40,13 @@ export default function Filters(props: FiltersProps) {
   }
 
   useEffect(() => {
-    // when filters change, filter laptops array
+    // when filters or query change, update products' array
     setResults(props.products.filter((product: Product) => filterHelper(product)));
-  }, [activeFilters]);
+  }, [activeFilters, props.products]);
 
-  function handleSort() {
-    console.log("TODO: Sort by options");
-  }
+  // function handleSort() {
+  //   console.log("TODO: Sort by options");
+  // }
 
   return (
     <div className={"flex flex-col w-8/12 h-full my-4 p-4"}>
@@ -54,7 +54,7 @@ export default function Filters(props: FiltersProps) {
         <div className={"flex flex-row"}>
           <p className={"text-2xl mr-2"}>{results.length} Result(s)</p>
         </div>
-        <div className={"flex flex-row items-center"}>
+        {/* <div className={"flex flex-row items-center"}>
           <p>Sort by</p>
           <button
             onClick={handleSort}
@@ -67,9 +67,9 @@ export default function Filters(props: FiltersProps) {
               <Image src={DownArrow} alt="arrow" />
             </div>
           </button>
-        </div>
+        </div> */}
       </div>
-      <div className={"flex flex-row flex-wrap justify-between"}>
+      <div className={"flex flex-row flex-wrap gap-4"}>
         {results.map((product) => (
           <FilterProduct key={product.id} product={product} />
         ))}

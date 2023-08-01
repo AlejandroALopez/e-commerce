@@ -5,7 +5,7 @@ import {
   createContext,
   useContext
 } from "react";
-import { laptopMenu, accessoriesMenu, deskptopMenu } from "@/utils/menuItems";
+import { laptopMenu, miceMenu, keyboardsMenu, headsetsMenu } from "@/utils/menuItems";
 import Item from "./Item";
 
 interface ContextProps {
@@ -30,18 +30,21 @@ export default function DropDown() {
     >
       <ul
         className={
-          "flex flex-col md:flex-row items-center justify-evenly w-11/12"
+          "flex flex-col md:flex-row items-center justify-center gap-20 w-11/12"
         }
       >
         <DropDownConext.Provider value={{ openType, setOpenType }}>
           <Item menu={laptopMenu} />
         </DropDownConext.Provider>
-        {/* <DropDownConext.Provider value={{ openType, setOpenType }}>
-          <Item menu={deskptopMenu} />
+        <DropDownConext.Provider value={{ openType, setOpenType }}>
+          <Item menu={miceMenu} />
         </DropDownConext.Provider>
         <DropDownConext.Provider value={{ openType, setOpenType }}>
-          <Item menu={accessoriesMenu} />
-        </DropDownConext.Provider> */}
+          <Item menu={keyboardsMenu} />
+        </DropDownConext.Provider>
+        <DropDownConext.Provider value={{ openType, setOpenType }}>
+          <Item menu={headsetsMenu} />
+        </DropDownConext.Provider>
       </ul>
     </nav>
   );

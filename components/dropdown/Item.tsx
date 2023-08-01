@@ -17,6 +17,7 @@ export default function Item(props: MenuProps) {
   const [activeSubtype, setActiveSubtype] = useState("");
 
   function goToCatalogueWithType(type: string | undefined) {
+    setOpenType("");
     router.push({
       pathname: "/catalogue",
       query: { type: type || "" },

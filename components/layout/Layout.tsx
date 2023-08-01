@@ -1,7 +1,7 @@
 import Navigation from "./Navigation";
 import Footer from './Footer';
 
-function Layout(props) {
+function Layout(props: any) {
   return (
     <div className={"flex flex-col"}>
       <Navigation />

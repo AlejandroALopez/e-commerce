@@ -47,6 +47,52 @@ export const micePriceFilters: PriceFilters[] = [
   },
 ];
 
+export const keyboardPriceFilters: PriceFilters[] = [
+  {
+    name: "$20 or less",
+    min: 0,
+    max: 20,
+  },
+  {
+    name: "$21 - $60",
+    min: 21,
+    max: 60,
+  },
+  {
+    name: "$61 - $100",
+    min: 61,
+    max: 100,
+  },
+  {
+    name: "$101 - $150",
+    min: 101,
+    max: 150,
+  },
+];
+
+export const headsetPriceFilters: PriceFilters[] = [
+  {
+    name: "$20 or less",
+    min: 0,
+    max: 20,
+  },
+  {
+    name: "$21 - $60",
+    min: 21,
+    max: 60,
+  },
+  {
+    name: "$61 - $100",
+    min: 61,
+    max: 100,
+  },
+  {
+    name: "$101 - $150",
+    min: 101,
+    max: 150,
+  },
+];
+
 export const laptopFilters: ComponentFilters[] = [
   {
     title: "Brand",
@@ -103,9 +149,14 @@ export const miceFilters: ComponentFilters[] = [
     options: ["Logitech", "Dell", "Lenovo", "Alienware"],
   },
   {
+    title: "Connectivity",
+    alias: "connectivity",
+    options: ["Wireless", "Wired"],
+  },
+  {
     title: "# of buttons",
     alias: "buttons",
-    options: ["4", "7"],
+    options: ["3", "7"],
   },
   {
     title: "Movement Resolution (DPI)",
@@ -119,5 +170,38 @@ export const keyboardFilters: ComponentFilters[] = [
     title: "Brand",
     alias: "brand",
     options: ["Logitech", "Dell", "Lenovo", "Alienware"],
+  },
+  {
+    title: "Connectivity",
+    alias: "connectivity",
+    options: ["Wireless", "Wired"],
+  },
+  {
+    title: "Technology",
+    alias: "technology",
+    options: ["Mechanical", "Lythium polymer", "Plunger"],
+  },
+  {
+    title: "Color",
+    alias: "color",
+    options: ["Graphite", "Dark Side of the Moon"],
+  },
+];
+
+export const headsetFilters: ComponentFilters[] = [
+  {
+    title: "Brand",
+    alias: "brand",
+    options: ["Logitech", "Dell", "Alienware"],
+  },
+  {
+    title: "Sound Output Mode",
+    alias: "sound",
+    options: ["Hi-Res audio"],
+  },
+  {
+    title: "Color",
+    alias: "color",
+    options: ["Black", "Blue", "Dark Side of the Moon"],
   },
 ];

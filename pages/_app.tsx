@@ -37,11 +37,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <Layout>
-      <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider value={{ cart, setCart }}>
+      <Layout>
         <Component {...pageProps} />
-      </CartContext.Provider>
-    </Layout>
+      </Layout>
+    </CartContext.Provider>
   );
 }
 

@@ -12,6 +12,10 @@ export default function Home(props: any) {
   const router = useRouter();
   const [slideIndex, setSlideIndex] = useState(0);
 
+  function slideClickHandler(route: string) {
+    router.push("/catalogue" + route);
+  }
+
   function goToCatalogueWithType(type: string | undefined) {
     router.push({
       pathname: "/catalogue",
@@ -30,16 +34,18 @@ export default function Home(props: any) {
           />
         </Head>
         <div className={"flex flex-col items-center"}>
-          <div
+          <button
+            onClick={() => slideClickHandler(slides[slideIndex].route)}
             className={
-              "w-full h-full rounded-2xl bg-center bg-cover duration-500"
+              "w-full h-full bg-center bg-cover duration-500"
             }
           >
             <Image
               src={slides[slideIndex]?.url}
               alt={slides[slideIndex]?.alt}
+              className={"w-full"}
             />
-          </div>
+          </button>
           <div className={"flex flex-row justify-center my-4"}>
             {[...Array(slides.length)].map(
               (value: undefined, index: number) => (

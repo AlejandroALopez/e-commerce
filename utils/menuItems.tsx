@@ -34,36 +34,56 @@ export const laptopMenu: Menu = {
   ],
 };
 
-export const deskptopMenu: Menu = {
-  title: "Desktop",
+export const miceMenu: Menu = {
+  title: "Mice",
   items: [
     {
-      title: "Monitors",
-      submenu: [{ title: "LED" }, { title: "4K HD" }],
+      title: "View All Mice",
+      query: "Mouse",
     },
     {
-      title: "RAM",
+      title: "Dell Mice",
     },
     {
-      title: "Graphic Cards",
-      submenu: [{ title: "NVIDIA GTX 3070" }, { title: "Titan" }],
+      title: "Logitech Mice",
+    },
+    {
+      title: "Lenovo mICE",
     },
   ],
 };
 
-export const accessoriesMenu: Menu = {
-  title: "Accessories",
+export const keyboardsMenu: Menu = {
+  title: "Keyboards",
   items: [
     {
-      title: "Keyboards",
-      submenu: [{ title: "Gaming Keyboards" }, { title: "Work Keyboards" }],
+      title: "View All Keyboards",
+      query: "Keyboard",
     },
     {
-      title: "Mice",
+      title: "Dell Keyboards",
     },
     {
-      title: "Headsets",
-      submenu: [{ title: "Beats Studio" }, { title: "Alienware" }],
+      title: "Logitech Keyboards",
+    },
+  ],
+};
+
+export const headsetsMenu: Menu = {
+  title: "Headsets",
+  items: [
+    {
+      title: "View All Headsets",
+      query: "Headset",
+    },
+    {
+      title: "Dell Headsets",
+    },
+    {
+      title: "Alienware Headsets",
+    },
+    {
+      title: "Logitech Headsets",
     },
   ],
 };

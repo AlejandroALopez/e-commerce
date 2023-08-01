@@ -9,6 +9,8 @@ export function getFolderName(type: string): string {
       return "mice";
     case "Keyboard":
       return "keyboards";
+    case "Headset":
+      return "headsets";
     default:
       return "";
   }
