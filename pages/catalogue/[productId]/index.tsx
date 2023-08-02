@@ -88,7 +88,7 @@ function ProductPage(props: ProductProps) {
       <div className={"flex flex-row bg-[#F5F5F5] justify-evenly mb-12"}>
         <div className={"w-5/12"}>
           <div className={"w-full my-6 p-5 bg-white drop-shadow-lg"}>
-            <p className={"text-3xl"}>{props.productData.title}</p>
+            <p className={"text-black text-3xl"}>{props.productData.title}</p>
           </div>
           <ImageSelector
             id={props.productData.id}
@@ -102,7 +102,7 @@ function ProductPage(props: ProductProps) {
               "flex flex-row justify-between items-center w-full my-6 py-2 px-4 bg-white drop-shadow-lg"
             }
           >
-            <p className={"text-xl"}>
+            <p className={"text-black text-xl"}>
               Price:{" "}
               <span className={"font-medium"}>
                 {moneyFormatter.format(currentPrice)}
@@ -130,7 +130,7 @@ function ProductPage(props: ProductProps) {
                           key={index}
                           className={"p-4 bg-white drop-shadow-lg"}
                         >
-                          <p className={"text-xl"}>
+                          <p className={"text-black text-xl"}>
                             {firstLetterUpercase(compType)}
                           </p>
                           <div className={"flex flex-row flex-wrap"}>
@@ -200,8 +200,8 @@ function ProductPage(props: ProductProps) {
                       props.productData.baseComponents[compType];
                     return (
                     <div key={index} className={"flex flex-col my-2 mx-4"}>
-                      <p className={"text-xl font-medium"}>{firstLetterUpercase(compType)}</p>
-                      <p>{component.name}</p>
+                      <p className={"text-black text-xl font-medium"}>{firstLetterUpercase(compType)}</p>
+                      <p className={"text-black"}>{component.name}</p>
                     </div>
                     );
                   }

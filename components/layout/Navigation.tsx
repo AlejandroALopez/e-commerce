@@ -28,7 +28,7 @@ export default function Navigation() {
         >
           <Image src={CartIcon} height={30} width={30} alt="cart"></Image>
           {cart.length > 0 && (
-            <div className={"px-3 py-1 ml-2 rounded-full bg-[#D40E0E]"}>
+            <div className={"px-3 py-1 ml-2 rounded-full bg-main"}>
               <p className={"text-white"}>{cart.length}</p>
             </div>
           )}

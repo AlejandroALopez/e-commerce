@@ -33,7 +33,7 @@ export default function Home(props: any) {
             content="An E-Commerce app built using Next.js, featuring laptops, PCs, accessories, and more!"
           />
         </Head>
-        <div className={"flex flex-col items-center"}>
+        <div className={"flex flex-col items-center bg-background"}>
           <button
             onClick={() => slideClickHandler(slides[slideIndex].route)}
             className={
@@ -60,7 +60,7 @@ export default function Home(props: any) {
             )}
           </div>
           <div className={"flex flex-col px-8 py-2"}>
-            <p className={"text-2xl font-medium"}>Products we offer</p>
+            <p className={"text-black text-2xl font-medium"}>Products we offer</p>
           </div>
           <div
             className={
@@ -87,7 +87,7 @@ export default function Home(props: any) {
                     alt={item.type}
                   />
                 </div>
-                <p className={"text-xl mt-4"}>{item.title}</p>
+                <p className={"text-black text-xl mt-4"}>{item.title}</p>
               </button>
             ))}
           </div>
