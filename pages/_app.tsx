@@ -12,7 +12,6 @@ import {
 import { CartElement } from "@/types/cartTypes";
 import {
   getLocalStorageItem,
-  setLocalStorageItem,
 } from "@/utils/localStorageUtils";
 
 interface ContextProps {

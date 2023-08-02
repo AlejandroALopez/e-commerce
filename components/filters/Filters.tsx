@@ -99,7 +99,7 @@ export default function Filters(props: FiltersProps) {
     <div
       className={"flex flex-col w-3/12 h-full my-4 p-4 bg-white drop-shadow-lg"}
     >
-      <p className={"text-2xl mb-2"}>Filters: </p>
+      <p className={"text-black text-2xl mb-2"}>Filters: </p>
       <div className={"flex flex-row flex-wrap"}>
         {Object.keys(activeFilters.components).map((filter) =>
           activeFilters.components[filter].map((f, index) => (
@@ -129,7 +129,7 @@ export default function Filters(props: FiltersProps) {
       </div>
       {/* price filters */}
       <div>
-        <p className={"text-xl"}>By Price</p>
+        <p className={"text-black text-xl"}>By Price</p>
         {availablePriceFilters.map((filter, index) => (
           <div key={index} className={"flex flex-row items-center my-2"}>
             <button
@@ -159,14 +159,14 @@ export default function Filters(props: FiltersProps) {
                 </div>
               )}
             </button>
-            <p>{filter.name}</p>
+            <p className={"text-black"}>{filter.name}</p>
           </div>
         ))}
       </div>
       {/* other filters */}
       {availableComponentFilters.map((filter, index) => (
         <div key={index}>
-          <p className={"text-xl"}>By {filter.title}</p>
+          <p className={"text-black text-xl"}>By {filter.title}</p>
           {filter.options?.map((option, i) => (
             <div key={i} className={"flex flex-row items-center my-2"}>
               <button
@@ -188,7 +188,7 @@ export default function Filters(props: FiltersProps) {
                   </div>
                 )}
               </button>
-              <p>{option}</p>
+              <p className={"text-black"}>{option}</p>
             </div>
           ))}
         </div>

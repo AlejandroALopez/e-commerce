@@ -52,7 +52,7 @@ export default function Filters(props: FiltersProps) {
     <div className={"flex flex-col w-8/12 h-full my-4 p-4"}>
       <div className={"flex flex-row justify-between items-center"}>
         <div className={"flex flex-row"}>
-          <p className={"text-2xl mr-2"}>{results.length} Result(s)</p>
+          <p className={"text-black text-2xl mr-2"}>{results.length} Result(s)</p>
         </div>
         {/* <div className={"flex flex-row items-center"}>
           <p>Sort by</p>

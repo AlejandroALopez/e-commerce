@@ -74,9 +74,9 @@ export function Cart() {
       >
         <div className={"mt-4"}>
           <button className={"mb-2"} onClick={() => router.back()}>
-            <p className={"text-xl text-gray-400 hover:text-[#D40E0E]"}>&lt; Keep shopping</p>
+            <p className={"text-xl text-gray-400 hover:text-main"}>&lt; Keep shopping</p>
           </button>
-          <p className={"text-3xl font-semibold"}>Your Cart</p>
+          <p className={"text-black text-3xl font-semibold"}>Your Cart</p>
         </div>
         <div className={"min-h-[12rem]"}>
           {cart.map((p) => (
@@ -96,7 +96,7 @@ export function Cart() {
                 />
               </div>
               <div className={" w-6/12 h-full p-4"}>
-                <p className={"text-xl font-semibold"}>{p.product.title}</p>
+                <p className={"text-black text-xl font-semibold"}>{p.product.title}</p>
               </div>
               <div
                 className={
@@ -104,7 +104,7 @@ export function Cart() {
                 }
               >
                 <div className={"flex flex-col items-end"}>
-                  <p className={"text-xl font-semibold"}>
+                  <p className={"text-black text-xl font-semibold"}>
                     {moneyFormatter.format(p.price)}
                   </p>
                   <button onClick={() => removeProduct(p.product.id)}>
@@ -122,7 +122,7 @@ export function Cart() {
                   >
                     <p className={"text-3xl text-gray-400"}>-</p>
                   </button>
-                  <p className={"text-xl"}>{p.number}</p>
+                  <p className={"text-black text-xl"}>{p.number}</p>
                   <button
                     disabled={p.number === 99}
                     onClick={() => increaseProductCount(p.product.id)}
@@ -136,15 +136,15 @@ export function Cart() {
         </div>
         <div className={"flex flex-row-reverse"}>
           <div className={"flex flex-row items justify-end gap-10 w-1/2"}>
-            <p className={"text-4xl font-semibold"}>Total: </p>
-            <p className={"text-4xl font-semibold"}>
+            <p className={"text-black text-4xl font-semibold"}>Total: </p>
+            <p className={"text-black text-4xl font-semibold"}>
               {moneyFormatter.format(getTotalPrice())}
             </p>
           </div>
         </div>
         <div className={"flex flex-row-reverse mb-12"}>
           <button
-            className={`bg-[#D40E0E] py-4 px-12 rounded-lg ${cart.length === 0
+            className={`bg-main py-4 px-12 rounded-lg ${cart.length === 0
                 ? "opacity-50"
                 : "transition hover:scale-110 duration-300"
               }`}
