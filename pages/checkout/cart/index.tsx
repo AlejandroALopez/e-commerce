@@ -70,7 +70,7 @@ export function Cart() {
         />
       </Head>
       <div
-        className={"flex flex-col gap-8 bg-[#F5F5F5] justify-evenly px-12 py-4"}
+        className={"flex flex-col gap-8 bg-background justify-evenly px-12 py-4"}
       >
         <div className={"mt-4"}>
           <button className={"mb-2"} onClick={() => router.back()}>
@@ -86,7 +86,7 @@ export function Cart() {
                 "flex flex-row h-60 rounded-md bg-white drop-shadow-md"
               }
             >
-              <div className={"flex justify-center items-center w-3/12 h-full"}>
+              <div className={"flex justify-center items-center w-[250px] h-[250px]"}>
                 <Image
                   src={`${bucket}/${getFolderName(p.product.type)}/${p.product.id
                     }/${p.product.images[0]}`}

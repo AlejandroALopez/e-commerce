@@ -30,7 +30,7 @@ export default function DropDown() {
     >
       <ul
         className={
-          "flex flex-col md:flex-row items-center justify-center gap-20 w-11/12"
+          "flex flex-col md:flex-row items-center justify-center md:gap-20 w-11/12"
         }
       >
         <DropDownConext.Provider value={{ openType, setOpenType }}>

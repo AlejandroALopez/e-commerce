@@ -85,8 +85,8 @@ function ProductPage(props: ProductProps) {
           content="Customize your selected product and add it to the cart!"
         />
       </Head>
-      <div className={"flex flex-row bg-[#F5F5F5] justify-evenly mb-12"}>
-        <div className={"w-5/12"}>
+      <div className={"flex flex-row flex-wrap bg-[#F5F5F5] justify-evenly mb-12"}>
+        <div className={"max-w-5/12"}>
           <div className={"w-full my-6 p-5 bg-white drop-shadow-lg"}>
             <p className={"text-black text-3xl"}>{props.productData.title}</p>
           </div>
@@ -96,7 +96,7 @@ function ProductPage(props: ProductProps) {
             images={props.productData.images}
           />
         </div>
-        <div className={"w-1/2"}>
+        <div className={"w-11/12 md:w-1/2"}>
           <div
             className={
               "flex flex-row justify-between items-center w-full my-6 py-2 px-4 bg-white drop-shadow-lg"
@@ -138,7 +138,7 @@ function ProductPage(props: ProductProps) {
                             {components.map((comp, i) => (
                               <button
                                 key={i}
-                                className={`flex flex-col justify-center items-center w-3/12 h-24 mt-4 mr-6 rounded-sm drop-shadow-lg ${
+                                className={`flex flex-col justify-center items-center w-5/12 lg:w-3/12 h-24 mt-4 mr-6 rounded-sm drop-shadow-lg ${
                                   isComponentActive(
                                     customProduct,
                                     compType,
