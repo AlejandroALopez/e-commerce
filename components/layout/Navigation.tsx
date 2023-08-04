@@ -19,7 +19,7 @@ export default function Navigation() {
         </Link>
       </div>
       <DropDown />
-      <div className={"flex items-center justify-center w-2/12"}>
+      <div className={"flex items-center justify-center w-2/12 mt-8 md:mt-0"}>
         <Link
           href="/checkout/cart"
           className={
