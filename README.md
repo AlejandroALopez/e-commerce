@@ -1,38 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AFK: An E-Commerce website for gaming laptops and accessories
 
-## Getting Started
+## Overview
+Years ago, I was looking to buy a gaming laptop as my MacBook Air could not handle most of my favorite games. Upon searching, I settled for a customized Alienware laptop that I use to this day, and it performs beautifully with demanding games like Witcher 3 and Red Dead Redemption 2.
 
-First, run the development server:
+I really liked the way the Dell website allowed me to customize each component of my laptop such as the graphic card, processor, and more. Thus, when I was thinking of ideas for an e-commerce website for my portfolio, I wanted to make something similar.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+AFK is a portfolio project built in NextJS to simulate an E-Commerce website. Even though it uses Stripe to simulate a real payment experience, this project does not sell real products.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- **Products**: See gaming products like laptops, mice, keyboards, and headsets
+- **Catalogue**: Search through the whole list of products with filters like price, brand, and available components like memory, graphic card, etc.
+- **Customize your laptop**: Before adding a laptop to the cart, you can customize each of its components and see the price change
+- **Cart & Payment**: Add products to the cart and proceed to a checkout page featured by Stripe
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tech stack
+- NextJS
+- TailwindCSS
+- Express
+- MongoDB
+- Stripe
+- Other tools: Figma, Postman
